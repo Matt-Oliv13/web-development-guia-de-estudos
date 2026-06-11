@@ -1,0 +1,98 @@
+<!-- ARQUIVO 1: entrada_dos_dados.html -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Formulário com Local Storage</title>
+</head>
+
+<body>
+    <h1>Cadastro de Usuário</h1>
+
+    <!-- 
+        Este formulário será usado para o usuário digitar seus dados.
+        Neste exemplo, vamos pedir apenas nome e idade.
+    -->
+    <form>
+        <!-- 
+            O label serve para identificar o campo.
+            O atributo for="nome" se conecta ao input que tem id="nome".
+        -->
+        <label for="nome">Nome:</label>
+
+        <!-- 
+            Campo onde o usuário digita o nome.
+            O id="nome" será usado no JavaScript para capturar o valor digitado.
+        -->
+        <input type="text" id="nome" name="nome">
+
+        <br><br>
+
+        <!-- Label relacionado ao campo idade -->
+        <label for="idade">Idade:</label>
+
+        <!-- 
+            Campo onde o usuário digita a idade.
+            type="number" indica que o campo deve receber números.
+        -->
+        <input type="number" id="idade" name="idade">
+
+        <br><br>
+
+        <!-- 
+            Botão que chama a função salvarDados() quando é clicado.
+            
+            IMPORTANTE:
+            type="button" evita que o formulário seja enviado automaticamente
+            e evita que a página recarregue.
+        -->
+        <button type="button" onclick="salvarDados()">Salvar dados</button>
+    </form>
+
+    <script>
+        // Função chamada quando o usuário clica no botão "Salvar dados"
+        function salvarDados() {
+            // Captura o input do nome pelo id="nome"
+            let campoNome = document.getElementById("nome");
+
+            // Captura o input da idade pelo id="idade"
+            let campoIdade = document.getElementById("idade");
+
+            // Pega o valor digitado dentro do input de nome
+            let nome = campoNome.value;
+
+            // Pega o valor digitado dentro do input de idade
+            let idade = campoIdade.value;
+
+            /*
+                localStorage.setItem() salva uma informação no navegador.
+
+                Estrutura:
+                localStorage.setItem("nomeDaChave", valor);
+
+                A chave funciona como um "nome" para encontrar o dado depois.
+                O valor é a informação que será salva.
+            */
+            localStorage.setItem("nomeUsuario", nome);
+
+            // Salvando a idade no localStorage
+            localStorage.setItem("idadeUsuario", idade);
+
+            /*
+                Após salvar os dados, vamos redirecionar o usuário
+                para outra página chamada saída_dos_dados.html.
+
+                Essa outra página vai recuperar os dados salvos
+                no localStorage e mostrar na tela.
+            */
+            window.location.href = "saída_dos_dados.html";
+        }
+    </script>
+</body>
+
+</html>

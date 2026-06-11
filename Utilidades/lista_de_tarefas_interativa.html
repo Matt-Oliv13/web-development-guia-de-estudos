@@ -1,0 +1,57 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Tarefas</title>
+</head>
+
+<body>
+    <h1>Lista de Tarefas</h1>
+    <form>
+        <!-- Texto explicativo "Adicionar tarefa" associado ao campo de input pelo atributo for -->
+        <!-- O valor de for deve ser igual ao id do input relacionado -->
+        <label for="tarefa">Adicionar tarefa: </label>
+
+        <!-- Campo de texto onde o usuário digita a tarefa -->
+        <!-- id="tarefa" permite que o JavaScript encontre esse elemento -->
+        <!-- name="tarefa" identifica esse campo dentro do formulário -->
+        <input type="text" id="tarefa" name="tarefa">
+
+        <!-- Botão que executa a função adicionarTarefa() ao ser clicado -->
+        <button type="button" onclick="adicionarTarefa()">Adicionar</button>
+    </form>
+
+    <!-- Lista não ordenada onde as tarefas serão adicionadas -->
+    <!-- Cada nova tarefa será inserida aqui dentro como um item <li> -->
+    <ul id="lista-de-tarefas"></ul>
+
+    <script>
+        // Função chamada quando o usuário clica no botão "Adicionar"
+        function adicionarTarefa() {
+            // Captura o campo de texto pelo id "tarefa"
+            let campoTarefa = document.getElementById("tarefa");
+
+            // Captura a lista <ul> pelo id "lista-de-tarefas"
+            let listaDeTarefas = document.getElementById("lista-de-tarefas");
+
+            // Cria um novo elemento <li>
+            let novaTarefa = document.createElement("li");
+
+            // Define o texto do novo <li> com o valor digitado no input
+            novaTarefa.textContent = campoTarefa.value;
+
+            // Adiciona o novo <li> dentro da lista <ul>
+            listaDeTarefas.appendChild(novaTarefa);
+
+            // Limpa o campo de texto para que o usuário possa digitar outra tarefa
+            campoTarefa.value = "";
+        }
+    </script>
+
+</body>
+
+</html>
+```

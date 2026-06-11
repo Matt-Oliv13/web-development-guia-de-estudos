@@ -1,0 +1,91 @@
+<!-- ARQUIVO 2: saída_dos_dados.html -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dados Salvos</title>
+</head>
+
+<body>
+    <h1>Dados do Usuário</h1>
+
+    <!-- 
+        Este parágrafo será usado para exibir o nome salvo.
+        O JavaScript vai acessar este elemento pelo id="resultadoNome".
+    -->
+    <p id="resultadoNome"></p>
+
+    <!-- 
+        Este parágrafo será usado para exibir a idade salva.
+        O JavaScript vai acessar este elemento pelo id="resultadoIdade".
+    -->
+    <p id="resultadoIdade"></p>
+
+    <!-- 
+        Botão para limpar os dados salvos no localStorage.
+    -->
+    <button type="button" onclick="limparDados()">Limpar dados</button>
+
+    <!-- 
+        Link para voltar ao formulário.
+    -->
+    <br><br>
+    <a href="entrada_de_dados.html">Voltar para o formulário</a>
+
+    <script>
+        /*
+            localStorage.getItem() recupera uma informação salva no navegador.
+
+            Estrutura:
+            localStorage.getItem("nomeDaChave");
+
+            A chave precisa ser a mesma usada no setItem().
+        */
+
+        // Recupera o nome salvo no localStorage
+        let nome = localStorage.getItem("nomeUsuario");
+
+        // Recupera a idade salva no localStorage
+        let idade = localStorage.getItem("idadeUsuario");
+
+        // Captura o parágrafo onde o nome será exibido
+        let resultadoNome = document.getElementById("resultadoNome");
+
+        // Captura o parágrafo onde a idade será exibida
+        let resultadoIdade = document.getElementById("resultadoIdade");
+
+        /*
+            Verificamos se existe algum nome salvo.
+            Se existir, exibimos o nome.
+            Se não existir, mostramos uma mensagem informando que nenhum dado foi encontrado.
+        */
+        if (nome && idade) { /* 'Se nome E idade existirem:' o operador 'E' lógico em javascript é '&&'. */
+            resultadoNome.textContent = "Nome: " + nome;
+            resultadoIdade.textContent = "Idade: " + idade;
+        } else {
+            resultadoNome.textContent = "Nenhum dado foi encontrado.";
+            resultadoIdade.textContent = "";
+        }
+
+        // Função chamada quando o usuário clica no botão "Limpar dados"
+        function limparDados() {
+            /*
+                localStorage.removeItem() remove apenas uma informação específica.
+                Para isso, informamos a chave que queremos apagar.
+            */
+            localStorage.removeItem("nomeUsuario");
+            localStorage.removeItem("idadeUsuario");
+
+            // Atualiza o texto da página depois de apagar os dados
+            resultadoNome.textContent = "Dados apagados.";
+            resultadoIdade.textContent = "";
+        }
+    </script>
+</body>
+
+</html>
