@@ -1,0 +1,39 @@
+<!-- Este documento será usado para entender a diferença de espaço de cada elemento de uma caixa / conteúdo. Se ainda houver dúvidas no posicionamento de cada elemento, abra a página prévia e inspecione os elementos clicando com o botão direito para visualizar cada detalhe -->
+ 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+    *{padding: 0;margin:0}
+    .div1{
+        margin:0;
+        padding:200px;
+        width:500px;
+        height: 20px;
+        border: 6px solid blue;
+        background-color: gray;
+        box-sizing: border-box;
+        /*Largura total: 500px, o box-sizing: border-box redimensiona tudo para caber dentro do tamanho desejado;*/
+    }
+    .div2{
+        margin:0px;
+        padding:20px;
+        width:500px; /*só controla o conteúdo, o resto é somado*/
+        height: 200px;
+        border: 6px solid green;
+        background-color: red;
+        /*largura total: 544px (contando a borda dos dois lados e o padding dos dois lados*/
+    }
+    </style>
+</head>
+<body>
+    <div class="div1">
+    </div>
+    <div class="div2">
+    </div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!-- 
+  Aqui veremos o uso de src e srcset em imagens responsivas.
+
+  src    = imagem padrão.
+  srcset = lista de imagens alternativas para o navegador escolher.
+-->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Exemplo de src e srcset</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111827;
+      color: white;
+      margin: 0;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #facc15;
+      text-align: center;
+    }
+
+    h2 {
+      color: #facc15;
+      margin-top: 40px;
+    }
+
+    p {
+      line-height: 1.6;
+      color: #d1d5db;
+    }
+
+    code {
+      color: #facc15;
+      background-color: #1f2937;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .bloco {
+      background-color: #374151;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 25px;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 20px auto 0;
+      border-radius: 10px;
+      border: 4px solid #4b5563;
+    }
+
+    .codigo {
+      background-color: #020617;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      color: #e5e7eb;
+      font-family: Consolas, monospace;
+      font-size: 15px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <h1>src e srcset em Imagens</h1>
+
+    <p>
+      No HTML, a tag <code>&lt;img&gt;</code> usa o atributo <code>src</code>
+      para indicar a imagem principal. Já o atributo <code>srcset</code> serve
+      para oferecer imagens alternativas ao navegador.
+    </p>
+
+    <section class="bloco">
+      <h2>1. Exemplo simples com src</h2>
+
+      <p>
+        O atributo <code>src</code> indica qual imagem será carregada.
+        Ele é obrigatório para mostrar a imagem.
+      </p>
+
+      <div class="codigo">&lt;img src="logo.jpg" alt="Logo da empresa"&gt;</div>
+
+      <img src="logo.jpg" alt="Logo da empresa">
+    </section>
+
+    <section class="bloco">
+      <h2>2. Exemplo com srcset usando 1x e 2x</h2>
+
+      <p>
+        O valor <code>1x</code> representa uma tela comum.
+        O valor <code>2x</code> representa telas com maior densidade de pixels,
+        como telas Retina ou celulares modernos.
+      </p>
+
+      <p>
+        Nesse caso, o navegador pode carregar a imagem <code>logo-HD.jpg</code>
+        em telas mais nítidas.
+      </p>
+
+      <div class="codigo">&lt;img
+  src="logo.jpg"
+  srcset="logo.jpg 1x, logo-HD.jpg 2x"
+  alt="Logo da empresa"
+&gt;</div>
+
+      <img
+        src="logo.jpg"
+        srcset="logo.jpg 1x, logo-HD.jpg 2x"
+        alt="Logo da empresa com versão normal e HD">
+    </section>
+
+    <section class="bloco">
+      <h2>3. Exemplo com srcset usando largura em w</h2>
+
+      <p>
+        O valor <code>300w</code>, <code>600w</code> ou <code>1000w</code>
+        informa ao navegador a largura real de cada arquivo de imagem.
+      </p>
+
+      <p>
+        O atributo <code>sizes</code> informa quanto espaço a imagem ocupará
+        na página. Assim, o navegador escolhe a imagem mais adequada.
+      </p>
+
+      <div class="codigo">&lt;img
+  src="banner-600.jpg"
+  srcset="banner-300.jpg 300w,
+          banner-600.jpg 600w,
+          banner-1000.jpg 1000w"
+  sizes="(max-width: 600px) 300px,
+         (max-width: 900px) 600px,
+         1000px"
+  alt="Banner responsivo"
+&gt;</div>
+
+      <img
+        src="banner-600.jpg"
+        srcset="banner-300.jpg 300w,
+                banner-600.jpg 600w,
+                banner-1000.jpg 1000w"
+        sizes="(max-width: 600px) 300px,
+               (max-width: 900px) 600px,
+               1000px"
+        alt="Banner responsivo">
+    </section>
+
+    <section class="bloco">
+      <h2>Resumo</h2>
+
+      <p>
+        <code>src</code> é a imagem padrão. 
+        <code>srcset</code> é uma lista de opções. 
+        <code>1x</code> e <code>2x</code> servem para densidade da tela.
+        <code>300w</code>, <code>600w</code> e outros valores com <code>w</code>
+        indicam a largura real do arquivo.
+      </p>
+    </section>
+
+  </main>
+
+</body>
+</html>

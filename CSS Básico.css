@@ -1,0 +1,889 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+
+/*Começaremos entendendo a hierarquia da formatação em CSS: 
+
+-O primeiro a ser aplicado é o CSS externo (este arquivo);
+-O segundo a ser aplicado é o CSS interno (na tag <style> em <head> do HTML);
+-O terceiro, com maior prioridade, é o CSS inline (na mesma linha do elemento determinado).
+
+Por isso possuímos 3 formas de edição com CSS.
+
+Além disso, no próprio arquivo CSS poderemos ver como um seletor de classe (.) ou id (#) sobrescreve uma edição feita por seletor de tag (<>). Mas atenção, prefira o uso de classes à ids, pois os ids só podem ser definidos para 1 único elemento e você precisará deles mais para o JavaScript.
+
+Agora, iremos configurar a página HTML Base.html através do CSS externo: */
+
+/*Configuração geral da rolagem da página*/
+
+html{
+    scroll-behavior: smooth; /*Permite que a página role de forma suave quando clicamos nos links internos do menu, ao invés de "pular" diretamente para o tópico.*/
+}
+
+/*Reset básico da página*/
+
+*{
+    margin:0; /*Espaço externo à borda dos elementos.*/
+    padding:0; /*Espaço interno à borda dos elementos.*/
+    box-sizing: border-box; /*Costumamos usar essa propriedade com border-box para ter controle de altura e largura redimensionando variáveis externas como padding e border junto com o conteúdo. Se quisermos alterar somente o conteúdo (padrão dos navegadores), usaremos content-box ao invés de border-box.*/
+}
+/*Sempre utilizamos um seletor (neste primeiro caso, usamos * para editar toda a página de uma só vez) referente à um, mais de um ou parte de um elemento, sempre com as propriedades entre chaves {} e anteriores aos valores, conforme o formato {propriedade:valor;}.*/
+
+/*Configuração base do corpo da página*/
+
+body{
+    background-color: #F4F0EA;
+    color: #5f673f;
+    font-family: "Cabin", sans-serif; /*Para mais personalização, busque no google fonts e adquira a fonte desejada clicando em "get embed code". A opção @import virá dentro do CSS, na primeira linha do arquivo. No site também é mostrado que valor é preciso colocar para chamar o recurso ou alterá-lo.*/
+    font-weight: 400; /*Esse é um parâmetro da fonte escolhida.*/
+}
+
+/*Editando o cabeçalho da página*/
+
+header{
+    padding: 2rem; /*Por preferência, utilizar o padding ao invés de margin para dar espaçamento sem interferir em outros elementos, considerando que o 'box-sizing: border-box' só considera padding e border, mas não a margem. Além disso, ao invés de pixels, utilizei rem por ser uma unidade de medida relativa, permitindo que o tamanho se adeque melhor às configurações de tela do usuário.*/
+    background-color: #211916;
+    text-align: center;
+}
+
+.p1{
+    padding-top: 0.5rem; /*Apenas uma mudança pontual para distanciar o parágrafo do título principal.*/
+}
+
+/*Editando o menu horizontal dos posts*/
+
+/*Este bloco depende da classe "menu-posts" adicionada na tag nav do HTML.
+Sem essa classe, o CSS abaixo não será aplicado ao menu.*/
+
+.menu-posts{
+    background-color: #331F19;
+    padding: 1rem;
+    display: flex; /*Transforma o menu em uma flexbox, facilitando o alinhamento dos links.*/
+    justify-content: center; /*Centraliza os links no eixo principal da flexbox.*/
+    flex-wrap: wrap; /*Permite que os links quebrem para a próxima linha caso não caibam todos na mesma largura da tela.*/
+    gap: 0.5rem; /*Cria espaçamento entre os links sem precisar usar margin em cada um deles.*/
+    position: sticky; /*Faz o menu "grudar" no topo da tela quando rolamos a página.*/
+    top: 0; /*Define que o menu ficará grudado no topo da tela.*/
+    z-index: 10; /*Garante que o menu fique acima de outros elementos durante a rolagem.*/
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25); /*Cria uma sombra discreta para destacar o menu do restante da página.*/
+}
+
+.menu-posts a{
+    color: #F4F0EA;
+    background-color: #55413a;
+    text-decoration: none; /*Remove o sublinhado padrão dos links.*/
+    padding: 0.5rem 0.8rem;
+    border-radius: 20px; /*Deixa os links com aparência de botões arredondados.*/
+    font-weight: 700;
+    transition: 0.3s; /*Faz as mudanças do hover acontecerem de forma mais suave.*/
+}
+
+.menu-posts a:hover{
+    background-color: #CCD595;
+    color: #331F19;
+    transform: scale(1.05); /*Aumenta levemente o link quando o cursor passa por cima.*/
+}
+
+.menu-posts a:focus{
+    outline: 2px solid #CCD595; /*Mantém uma indicação visual para navegação por teclado, importante para acessibilidade.*/
+    outline-offset: 3px; /*Afasta um pouco o contorno do link.*/
+}
+
+/*Editando o conteúdo principal da página*/
+
+main{
+    padding:2rem;
+    display:flex; /*Por padrão, apenas digitar "display:flex" irá alinhar todos os elementos filhos na horizontal. Por esta razão, usaremos:*/
+    flex-direction: column; /*Por padrão, a direção do flex é em row, ou seja, horizontal. Colocando column, deixamos os elementos filhos empilhados na vertical.*/
+    gap:2rem; /*gap define um espaçamento entre todos os elementos filhos da flexbox.*/
+    text-align: justify;
+}
+
+section{
+    display:flex;
+    flex-direction: column;
+    gap:1rem;
+    scroll-margin-top: 6rem; /*Evita que o título do post fique escondido atrás do menu fixo quando clicamos em um link do índice.*/
+}
+
+h2{
+    color:#331F19;
+    font-size:1.2rem;
+}
+
+/*Editando listas e áreas expansíveis*/
+
+details{ /*Aqui começaremos a editar listas (POST2).*/
+    background-color: #CCD595;
+    border-radius: 5px;
+    padding:0.5rem;
+}
+
+summary{ /*Continuando a editar as listas (POST2).*/
+    margin:0.5rem;
+    color:#331F19; /*Perceba que no html, apenas a segunda lista possui um summary, e, por isso, teríamos que alterar a primeira lista de outra forma.*/
+    cursor: pointer; /*Indica visualmente que o usuário pode clicar no summary para abrir ou fechar o details.*/
+}
+
+.pol{
+    margin-left:0.5rem;
+    margin-bottom:0.5rem;
+}
+
+ol{
+    margin-left:1.5rem;
+}
+
+ol li{ /*Aqui estamos determinando que apenas os elementos "li" do elemento pai "ol" serão modificados, evitando assim que os itens da outra lista sejam modificados.*/
+    padding:0.2rem;
+}
+/*Deixei de propósito a primeira lista(ul) inacabada para que fique clara a diferença de se utilizar de recursos como o summary.*/
+
+/*Editando o bloco com aside*/
+
+/*IMPORTANTE:
+A tag aside sozinha NÃO joga o conteúdo para a direita.
+Ela apenas informa semanticamente que aquele conteúdo é complementar.
+Quem cria o visual em duas colunas é o CSS abaixo, principalmente o display:flex aplicado em .bloco-aside.*/
+
+.bloco-aside{
+    display: flex; /*Aqui transformamos o bloco do conteúdo principal + aside em uma flexbox.*/
+    gap: 1.5rem; /*Cria um espaço entre o conteúdo principal e o aside.*/
+    align-items: flex-start; /*Alinha os dois blocos pelo topo.*/
+}
+
+.conteudo-principal{
+    flex: 3; /*O conteúdo principal ocupa mais espaço que o aside. Neste caso, ele ocupa aproximadamente 3 partes do espaço disponível.*/
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.bloco-aside aside{
+    flex: 1; /*O aside ocupa uma parte menor do espaço horizontal. Como o conteúdo principal tem flex:3, o aside fica proporcionalmente menor.*/
+    background-color: #CCD595;
+    color: #331F19;
+    border-left: 5px solid #55413a; /*Cria uma borda lateral para reforçar a ideia de observação ou bloco complementar.*/
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15); /*Cria um destaque visual leve, como se fosse um card lateral.*/
+}
+
+.bloco-aside aside h3{
+    margin-bottom: 0.5rem;
+}
+
+/*Editando inputs de seleção*/
+
+input[type="radio"], input[type="checkbox"]{ /*Aqui estamos selecionando apenas o input com tipo radio, ou seja, da seleção de múltipla escolha (POST 4 do html) e do checkbox (POST 8 do html).*/
+    accent-color: rgb(94, 127, 94); /*Com accent-color definimos a cor de elementos de interface do usuário nativos, como checkboxes, botões de rádio (radio), controles de intervalo (range) e barras de progresso (progress). */
+}
+
+/*Editando campos de digitação*/
+
+input[type="text"], input[type="password"],input[type="date"], input[type="email"]{
+    width:100%; /*Faz o campo ocupar toda a largura disponível dentro do elemento pai.*/
+    padding: 0.6rem;
+    border:2px solid rgb(94, 127, 94);
+    border-radius: 5px;
+    background-color: transparent;
+    outline:none; /* outline é uma propriedade que define um highlight/cor diferente ao clicar no elemento. Geralmente é útil em questão de acessibilidade, mas pode ser retirado com 'none' por questões estéticas.*/
+}
+
+input::placeholder{
+    color:#348f5e;
+    /*Placeholder é um pseudoelemento do css e, por conta disso, quando vamos estilizá-lo, utilizamos :: após o input ao invés de [type=""]. Isso é algo bem específico, não se preocupe em decorar. */
+}
+
+/*Editando o menu suspenso*/
+
+select{
+    background-color: #e2e5d2;
+    color:#6a3309;
+    border-radius: 5px;
+    border:none;
+    cursor:pointer; /*Aqui sempre que o cursor passar pelo menu suspenso (no Post 10), ele mudará sua figura para uma mão apontando.*/
+    padding: 0.5rem;
+}
+
+/*Edição da imagem e texto de referência*/
+
+figure{ /*Aqui vamos organizar a imagem e o texto na horizontal transformando o campo 'figure' em outra flexbox.*/
+    display: flex;
+    align-items: center; /*Alinha verticalmente a imagem e a legenda.*/
+    justify-content: left;
+    gap: 10px;
+    margin: 1rem 0;
+}
+
+img{ /*Aqui editaremos a imagem inserida no POST 11.*/
+    width:20rem;
+    margin:1rem;
+    border-radius: 10px;
+}
+
+figcaption{
+    font-size: 0.8rem;
+    text-align: justify;
+    width:15%;
+}
+
+/*Editando a tabela*/
+
+table{
+    width:100%;
+    border-collapse: collapse; /*Essa propriedade é muito útil para evitar a borda dupla criada por padrão para tabelas no html. Assim, a tabela fica com linhas simples em todos os seus campos.*/
+}
+
+th{
+    background-color: #CCD595;
+    color: #331F19;
+    padding:0.5rem;
+}
+
+td{
+    color:#331F19;
+    padding:0.5rem;
+    text-align: center;
+}
+
+tfoot td{ /*Sempre que queremos um elemento específico que está dentro de um elemento "pai", mesmo não sendo "filho" direto, mas um descendente, podemos colocar o elemento pai + espaço + o elemento descendente à ser editado.*/
+    background-color:#55413a;
+    color:#F4F0EA;
+    text-align: justify;
+}
+
+/*Agora para editar o formulário*/
+
+fieldset{
+    border: 2px solid #3e772d;
+    border-radius: 5px;
+    padding:1rem;   
+}
+
+legend{
+    color:#331F19;
+    padding: 0 0.5rem; /*Quando queremos alterar somente o espaçamento de uma direção entre vertical e horizontal, colocamos dois valores, sendo o primeiro o da vertical (0) e o segundo o da horizontal (0.5rem).*/
+}
+
+textarea{
+    width: 100%; /*Faz a área de comentários ocupar toda a largura disponível.*/
+    background-color: transparent;
+    outline:none;
+    border-radius:5px;
+    border: 2px solid #348f5e;
+    padding: 0.6rem;
+}
+
+button{
+    cursor:pointer;
+    background-color: #c8dbc0;
+    padding:0.5rem;
+    border:none;
+    color:#331F19;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+button:hover{
+    background-color: #CCD595;
+    transform: scale(1.03); /*Cria um pequeno efeito de aproximação quando o cursor passa sobre o botão.*/
+}
+
+/*Editando o footer da página*/
+
+footer{
+    background-color: #331F19;
+}
+
+.paragrafo-footer{
+    color: #F4F0EA;
+    padding:2rem;
+    text-align: center;
+}
+
+/*Editando links que receberam a classe .a no HTML*/
+
+.a{
+    text-decoration: none;
+    color:#917617;
+}
+
+.a:hover{
+    text-decoration: underline; /*Quando o cursor passar sobre o link, o sublinhado aparecerá para indicar melhor a interação.*/
+}
+
+/*Responsividade básica*/
+
+/*O bloco abaixo é uma media query.
+Ela cria regras especiais que só serão aplicadas quando a tela tiver, no máximo, 768px de largura.
+Ou seja: celular, tablet pequeno ou janela do navegador muito estreita.
+
+Sem essa parte, elementos que ficam lado a lado no computador poderiam ficar apertados demais em telas pequenas.*/
+
+@media (max-width: 768px){
+
+    main{
+        padding: 1rem; /*No CSS normal, o main tem padding de 2rem. Em telas pequenas, reduzimos para 1rem para sobrar mais espaço para o conteúdo.*/
+    }
+
+    .menu-posts{
+        position: static; /*No computador, o menu fica sticky, ou seja, grudado no topo. Em telas pequenas, como há muitos links, isso poderia ocupar espaço demais. Por isso, ele volta ao comportamento normal da página.*/
+    }
+
+    .bloco-aside{
+        flex-direction: column; /*No computador, o conteúdo principal e o aside ficam lado a lado. Em telas pequenas, isso ficaria apertado. Com column, o aside passa a ficar abaixo do conteúdo principal.*/
+    }
+
+    figure{
+        flex-direction: column; /*No computador, a imagem e a legenda ficam lado a lado. Em telas pequenas, elas passam a ficar uma embaixo da outra.*/
+        align-items: flex-start; /*Alinha a imagem e a legenda pelo início, evitando que fiquem centralizadas de forma estranha.*/
+    }
+
+    img{
+        width: 100%; /*A imagem passa a ocupar a largura disponível do elemento pai, evitando que ultrapasse a tela.*/
+        margin: 0; /*Remove a margem da imagem para evitar estouro lateral em telas pequenas.*/
+    }
+
+    figcaption{
+        width: 100%; /*No CSS normal, a legenda tem width de 15%, mas isso fica estreito demais no celular. Aqui ela passa a ocupar a largura toda.*/
+    }
+}
+
+/*Considerações Importantes!
+--------------------------------------
+Este bloco abaixo funciona como uma área de consulta rápida.
+Ele não interfere diretamente no código acima, pois está inteiro dentro de um comentário CSS.
+--------------------------------------
+
+1. SELETORES
+
+Seletores indicam quais elementos do HTML serão estilizados.
+
+Seletor        - Seleciona
+A B            - Elemento B descendente de A
+A > B          - Elemento B filho direto de A
+A + B          - Elemento B imediatamente após A (irmãos)
+A ~ B          - Elemento B após A (irmãos)
+A:first-child  - Primeiro filho de A
+A:last-child   - Último filho de A
+A:nth-child(n) - (n)º filho de A
+
+Exemplo:
+section p {
+    color: red;
+}
+
+No exemplo acima, todos os parágrafos dentro de section seriam modificados.
+
+Resumo:
+Seletor simples seleciona uma tag, classe ou id.
+Seletor composto seleciona elementos com base na relação entre eles.
+
+--------------------------------------
+
+2. CLASSE E ID
+
+Classe:
+- Começa com ponto no CSS
+- Pode ser reutilizada em vários elementos
+- Exemplo: .menu-posts
+
+ID:
+- Começa com # no CSS
+- Deve ser usado em apenas um elemento
+- Exemplo: #post1
+
+Recomendação:
+Use classes para estilização.
+Use ids principalmente para elementos únicos, links internos ou JavaScript.
+
+--------------------------------------
+
+3. DISPLAY
+
+Define como o elemento se comporta na página.
+
+Principais valores:
+
+display: block;
+- Ocupa a largura toda disponível
+- Quebra linha
+- Exemplos comuns: div, p, section, header
+
+display: inline;
+- Ocupa apenas o espaço do conteúdo
+- Não quebra linha
+- Não aceita width/height da mesma forma que block
+- Exemplos comuns: a, span, strong, em
+
+display: inline-block;
+- Fica na mesma linha
+- Aceita width, height, padding e margin com mais controle
+
+display: flex;
+- Ativa o layout flexível
+- Muito usado para alinhar e distribuir elementos
+
+Resumo:
+block = bloco inteiro
+inline = elemento de linha
+inline-block = linha com comportamento de bloco
+flex = alinhamento e organização de layout
+
+--------------------------------------
+
+4. FLEXBOX
+
+Usado para alinhar, organizar e distribuir elementos dentro de um container.
+
+No elemento pai:
+display: flex;
+
+Direção dos elementos:
+flex-direction: row;     elementos em linha
+flex-direction: column;  elementos em coluna
+
+Alinhamento no eixo principal:
+justify-content: flex-start;
+justify-content: center;
+justify-content: flex-end;
+justify-content: space-between;
+justify-content: space-around;
+justify-content: space-evenly;
+
+Alinhamento no eixo secundário:
+align-items: flex-start;
+align-items: center;
+align-items: flex-end;
+align-items: stretch;
+
+Espaço entre elementos:
+gap: 1rem;
+
+Exemplo:
+div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+Resumo:
+flex facilita organizar elementos lado a lado ou em coluna.
+
+--------------------------------------
+
+5. PSEUDOCLASSES
+
+Pseudoclasses representam estados dos elementos.
+
+Principais:
+
+:link     - link ainda não visitado
+:visited  - link já visitado
+:hover    - quando o cursor passa por cima
+:active   - quando o elemento está sendo clicado
+:focus    - quando o elemento recebe foco
+:checked  - quando um campo está marcado
+:enabled  - quando um campo está disponível
+:disabled - quando um campo está indisponível
+
+Exemplo com links:
+a.estilo1:link {
+    color: blue;
+}
+
+a.estilo1:visited {
+    color: purple;
+}
+
+a.estilo1:hover {
+    color: red;
+}
+
+a.estilo1:active {
+    font-size: 150%;
+}
+
+OBS:
+Em links, a ordem pode interferir no resultado.
+Uma ordem comum é:
+:link
+:visited
+:hover
+:active
+
+Resumo:
+Pseudoclasse = estado de um elemento.
+
+--------------------------------------
+
+6. PSEUDOELEMENTOS
+
+Pseudoelementos são usados para estilizar partes específicas de um elemento,
+como a primeira letra, a primeira linha, o placeholder ou marcadores de lista.
+
+Eles são escritos com :: (dois pontos duplos).
+
+Exemplo:
+p::first-letter {
+    font-size: 30px;
+}
+
+Principais pseudoelementos:
+
+::before
+- Insere conteúdo antes do elemento
+- Precisa da propriedade content
+
+Exemplo:
+div::before {
+    content: "★ ";
+}
+
+::after
+- Insere conteúdo depois do elemento
+- Também precisa da propriedade content
+
+Exemplo:
+div::after {
+    content: " ✔";
+}
+
+::first-letter
+- Estiliza a primeira letra de um texto
+
+Exemplo:
+p::first-letter {
+    font-size: 30px;
+    color: red;
+}
+
+::first-line
+- Estiliza apenas a primeira linha do texto
+
+Exemplo:
+p::first-line {
+    font-weight: bold;
+}
+
+::selection
+- Estiliza o texto quando o usuário seleciona com o mouse
+
+Exemplo:
+::selection {
+    background: black;
+    color: white;
+}
+
+::placeholder
+- Estiliza o texto placeholder de inputs
+
+Exemplo:
+input::placeholder {
+    color: gray;
+}
+
+::marker
+- Estiliza o marcador de listas, como bolinhas ou números
+
+Exemplo:
+li::marker {
+    color: red;
+}
+
+Resumo:
+Pseudoelementos = partes de elementos
+Pseudoclasses = estados de elementos
+
+Comparação:
+a:hover        -> quando o mouse passa sobre o link
+p::first-line  -> primeira linha do parágrafo
+
+--------------------------------------
+
+7. VARIÁVEIS EM CSS
+
+Variáveis servem para guardar valores e reutilizá-los no código.
+
+São muito usadas para cores, tamanhos, espaçamentos e padrões visuais.
+
+Exemplo:
+:root {
+    --cor-principal: #3498db;
+    --cor-secundaria: #2ecc71;
+}
+
+Para usar:
+p {
+    color: var(--cor-principal);
+}
+
+Valor reserva:
+p {
+    color: var(--cor-inexistente, black);
+}
+
+No exemplo acima, se --cor-inexistente não existir, a cor black será usada.
+
+Vantagens:
+- facilita mudanças
+- evita repetição
+- mantém o padrão visual do site
+- melhora a organização do CSS
+
+Resumo:
+--nome cria a variável
+var(--nome) usa a variável
+
+--------------------------------------
+
+8. TRANSFORMAÇÕES (transform)
+
+Transformações alteram visualmente um elemento sem mudar o fluxo real do layout.
+
+Principais:
+
+transform: translate(x, y);
+- move o elemento no eixo X e/ou Y
+
+transform: scale(n);
+- aumenta ou diminui o elemento
+
+transform: rotate(deg);
+- gira o elemento
+
+transform: skew(deg);
+- inclina o elemento
+
+Exemplo:
+div:hover {
+    transform: scale(1.2) rotate(10deg);
+}
+
+Resumo:
+transform muda a aparência/posição visual do elemento.
+
+--------------------------------------
+
+9. TRANSIÇÕES (transition)
+
+Transições servem para animar mudanças de forma suave.
+
+Principais propriedades:
+
+transition-property:
+- define o que será animado
+
+transition-duration:
+- define quanto tempo a animação vai durar
+
+transition-timing-function:
+- define o ritmo da animação, como ease ou linear
+
+transition-delay:
+- define atraso antes da animação começar
+
+Forma curta:
+transition: all 0.3s ease;
+
+Exemplo:
+div {
+    transition: 0.3s;
+}
+
+div:hover {
+    transform: scale(1.2);
+}
+
+Resumo:
+transform = muda o estado visual
+transition = suaviza a mudança
+
+--------------------------------------
+
+10. POSITION
+
+Define como o elemento será posicionado na página.
+
+position: static;
+- valor padrão
+- o elemento segue o fluxo normal
+- ignora top, left, right e bottom
+
+position: relative;
+- move o elemento em relação à posição original
+- pode servir como referência para filhos absolute
+
+position: absolute;
+- remove o elemento do fluxo normal
+- posiciona em relação ao ancestral posicionado mais próximo
+
+position: fixed;
+- fixa o elemento na tela
+- mesmo rolando a página, ele continua no mesmo lugar
+
+position: sticky;
+- funciona como elemento normal até atingir uma posição definida
+- depois "gruda" na tela durante a rolagem
+
+Propriedades usadas junto com position:
+top
+left
+right
+bottom
+
+Exemplo:
+nav {
+    position: sticky;
+    top: 0;
+}
+
+Resumo:
+position define como e em relação a quem o elemento será posicionado.
+
+--------------------------------------
+
+11. Z-INDEX
+
+Controla a ordem de sobreposição dos elementos.
+
+Funciona principalmente em elementos com position diferente de static:
+relative
+absolute
+fixed
+sticky
+
+Exemplo:
+div {
+    position: relative;
+    z-index: 2;
+}
+
+Maior valor = mais à frente
+Menor valor = mais atrás
+
+Resumo:
+z-index controla quem aparece por cima.
+
+--------------------------------------
+
+12. RESPONSIVIDADE
+
+Responsividade serve para adaptar a página a diferentes tamanhos de tela.
+
+Usamos media queries para aplicar regras apenas em determinadas condições.
+
+Exemplo:
+@media (max-width: 768px) {
+    div {
+        flex-direction: column;
+    }
+}
+
+No exemplo acima, quando a tela tiver até 768px de largura,
+a div passará a organizar os elementos em coluna.
+
+Resumo:
+media query = regra especial para certos tamanhos de tela.
+
+--------------------------------------
+
+13. UNIDADES DE MEDIDA
+
+px:
+- medida fixa
+- não se adapta tanto às configurações do usuário
+
+rem:
+- medida relativa ao tamanho de fonte raiz do documento
+- boa para acessibilidade
+
+em:
+- medida relativa ao tamanho da fonte do elemento pai
+
+%:
+- medida relativa ao tamanho do elemento pai
+
+vw:
+- relativo à largura da janela do navegador
+
+vh:
+- relativo à altura da janela do navegador
+
+Resumo:
+px = fixo
+rem/em/%/vw/vh = relativos
+
+--------------------------------------
+
+14. BOX MODEL
+
+Todo elemento pode ser entendido como uma caixa.
+
+Partes principais:
+
+content:
+- conteúdo do elemento
+
+padding:
+- espaço interno entre o conteúdo e a borda
+
+border:
+- borda do elemento
+
+margin:
+- espaço externo entre o elemento e os outros elementos
+
+Exemplo:
+div {
+    margin: 1rem;
+    padding: 1rem;
+    border: 1px solid black;
+}
+
+Resumo:
+margin = espaço externo
+padding = espaço interno
+border = borda
+content = conteúdo
+
+--------------------------------------
+
+15. ACESSIBILIDADE BÁSICA NO CSS
+
+Algumas decisões visuais também ajudam na acessibilidade:
+
+- Não remover o foco dos elementos sem oferecer alternativa visual
+- Manter contraste entre texto e fundo
+- Usar tamanhos relativos como rem
+- Não depender apenas de cor para indicar informação
+- Criar estados hover e focus quando possível
+
+Exemplo:
+a:focus {
+    outline: 2px solid blue;
+}
+
+Resumo:
+CSS não é só estética; ele também interfere na experiência de uso.
+
+--------------------------------------
+
+16. RESUMO GERAL
+
+Seletores escolhem o que será estilizado.
+Classes podem ser reutilizadas.
+Ids devem ser únicos.
+Display define como o elemento se comporta.
+Flex organiza elementos com mais facilidade.
+Pseudoclasses estilizam estados.
+Pseudoelementos estilizam partes específicas.
+Variáveis guardam valores reutilizáveis.
+Transform muda visualmente.
+Transition suaviza mudanças.
+Position controla posicionamento.
+Z-index controla sobreposição.
+Media queries ajudam na responsividade.
+Box model explica a caixa de cada elemento.
+
+*/

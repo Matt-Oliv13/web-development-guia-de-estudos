@@ -1,0 +1,249 @@
+<!DOCTYPE html> <!--Tipo de documento-->
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Site protótipo de HTML/CSS para iniciar estudos"> <!--name é o tipo de informação que você está definindo (descrição, autor, palavras-chave, etc.); content é o valor dessa informação para quem está fazendo a pesquisa em browsers-->
+    <title>PROJETO HTML</title>
+    <link rel="stylesheet" href="CSS Básico.css"> <!--A tag link permite referenciar um arquivo CSS para editarmos a página depois de pensarmos em toda sua estruturação HTML-->
+</head>
+<body>
+<!--Aqui poderia vir uma tag <div> antes de header, seguindo a hierarquia de documentos html. De resto, seguimos todos os possíveis ramos.-->
+    <header>
+        <h1>PROJETO HTML/CSS</h1>
+        <p class="p1">Praticando meus conhecimentos em programação para montar uma página em <abbr title="HyperText Markup Language">HTML</abbr> e aplicar uma formatação com <abbr title="Cascading Style Sheets">CSS</abbr>(<i>as abreviações foram explicadas via comando abbr</i>).</p> <!--abbr é um comando utilizado para dar significado às abreviações-->
+    </header>
+
+    <nav class="menu-posts">
+        <a href="#post1">Post 1</a>
+        <a href="#post2">Post 2</a>
+        <a href="#post3">Post 3</a>
+        <a href="#post4">Post 4</a>
+        <a href="#post5">Post 5</a>
+        <a href="#post6">Post 6</a>
+        <a href="#post7">Post 7</a>
+        <a href="#post8">Post 8</a>
+        <a href="#post9">Post 9</a>
+        <a href="#post10">Post 10</a>
+        <a href="#post11">Post 11</a>
+        <a href="#post12">Post 12</a>
+        <a href="#post13">Post 13</a>
+        <a href="#post14">Post 14</a>
+    </nav>
+
+    <main>
+        <!--POST 1: Lorem, Negrito, Itálico-->
+        <section id="post1">
+            <h2>POST 1: Lorem, Negrito e Itálico </h2>
+            <p>Este post funciona como um primeiro teste de estrutura, então vou usar o comando <strong>lorem</strong> para preencher parte do conteúdo com um texto provisório: Lorem ipsum, dolor sit amet consectetur acorrupti rem consectetur blanditiis!</p>
+            <p><em>Mais um parágrafo, mas dessa vez, ao invés de testar o negrito com o comando <strong>strong</strong>... 
+            <br>
+            <br>
+            estarei usando o comando <strong>em</strong> para deixar o trecho em itálico</em></p>
+            <p>Poderíamos utilizar os comandos <b>'b'</b> e <i>'i'</i> para negrito e itálico, respectivamente, mas, pensando em acessibilidade e semântica, <strong>'strong'</strong> e <em>'em'</em> caracterizam as palavras como muito importantes e importantes, nessa ordem.</p>
+        </section>
+        <!--POST 2: Listas-->
+        <section id="post2">
+            <h2>POST 2: Listas</h2>
+            <p>Podemos criar listas ordenadas ou não ordenadas. Listas ordenadas são feitas com o comando 'ol', enquanto listas não ordenadas usam 'ul'. Depois disso, cada item começa com o comando 'li'. Além disso, com o comando "details", podemos esconder os elementos da lista até que o usuário clique para visualizá-la.</p>
+
+            <details>
+            <p>Lista não ordenada (Ficará mal formatada de propósito)</p>
+                <ul>
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ul>
+            </details>
+
+            <p>Mas se quisermos personalizar o título da lista minimizada, podemos adicionar 'summary>título&lt;/summary>' após 'details':</p>
+
+            <details>
+                <summary>Clique aqui para ver a lista!</summary>
+                <p class="pol">Lista ordenada</p>
+                    <ol>
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                    </ol>
+            </details>
+        </section>
+        <!--POST 3: Tag Aside-->
+        <section id="post3">
+            <h2>POST 3: Conteúdo Complementar com Aside</h2>
+
+            <div class="bloco-aside">
+                <div class="conteudo-principal">
+                    <p>A tag 'aside' é usada para inserir um conteúdo complementar ao conteúdo principal da página. Ela pode aparecer como uma observação, uma dica, um aviso, uma curiosidade ou até uma área com links relacionados.</p>
+
+                    <p>Sozinha, a tag 'aside' não posiciona automaticamente o conteúdo na lateral da página. Para criar esse efeito visual, usamos CSS. Neste exemplo, a organização em duas colunas foi feita com display flex.</p>
+
+                    <p>Assim, o conteúdo principal fica à esquerda, enquanto o bloco complementar aparece destacado na direita, funcionando como uma caixa lateral de apoio ao assunto.</p>
+                </div>
+
+                <aside>
+                    <h3>Observação lateral</h3>
+                    <p>Este bloco foi criado com a tag 'aside'. Em uma página real, ele poderia trazer uma explicação extra, um resumo rápido ou uma dica relacionada ao conteúdo principal.</p>
+                </aside>
+            </div>
+        </section>
+        <!--POST 4: Seleção de Múltipla Escolha, 1 Resposta-->
+        <section id="post4">
+            <h2>POST 4: Seleção de Múltipla Escolha (1 Resposta)</h2>
+            <p>Vamos criar algumas opções selecionáveis através do comando 'form' (para criar um formulário) e em seguida inserir alguns 'input' com o seu devido 'type':</p>
+            <form>
+                <input type="radio" value="Escolha 1" id="s1a" name="seleção1"> <!--Type define o tipo de seleção, value é o valor que a pessoa envia ao clicar (!), id é a identidade do elemento, e name é o que estará linkando a opção à um grupo específico (e isso, dentro do tipo 'radio' obriga o sistema a aceitar somente uma opção)-->
+                <label for="s1a">Escolha 1</label> <!--Sempre precisamos criar um label para definir o texto e linkar o input com os dados previamente preenchidos. Para isso usamos o mesmo id definido antes no 'for'-->
+                <br>
+
+                <input type="radio" value="Escolha 2" id="s1b" name="seleção1">
+                <label for="s1b">Escolha 2</label>
+                <br>
+
+                <input type="radio" value="Escolha 3" id="s1c" name="seleção1">
+                <label for="s1c">Escolha 3</label>
+                <br><br>
+                <p>Atenção! Lembre que no tipo 'radio' <strong>você deve definir um mesmo 'name'</strong> como parâmetro do input para que apenas uma opção possa ser selecionada!</p>
+
+            </form>
+        </section>
+        <!--POST 5: Inserção de Campo de Texto-->
+        <section id="post5">
+            <h2>POST 5: Inserção de Texto </h2>
+            <p> Agora veremos como funciona um campo para digitação. Basicamente iremos repetir o form e input com seus atributos, mas dessa vez como 'type=text' e sem o 'value', já que o valor será aquilo que o usuário escrever. Aqui adicionamos o comando 'placeholder' para definir uma orientação dentro do campo de texto.</p>
+            <form>
+                <input type="text" id="txt" name="pst4" placeholder="Digite aqui...">
+            </form>
+        </section>
+        <!--POST 6: Inserção de Senha-->
+        <section id="post6">
+            <h2>POST 6: Inserção de Senha</h2>
+            <form>
+                <input type="password" id="pswd" name="senha" placeholder="Insira sua senha">
+            </form>
+        </section>
+        <!--POST 7: Inserção de Data-->
+        <section id="post7">
+            <h2>POST 7: Inserção de Data</h2>
+            <form>
+                <input type="date" id="date" name="data">
+            </form>
+        </section>
+        <!--POST 8: Seleção múltipla-->
+        <section id="post8">
+            <h2>POST 8: Seleção Múltipla</h2>
+            <p>Aqui faremos novamente uma seleção, mas dessa vez com input type=checkbox, permitindo várias entradas mesmo que o parâmetro name seja igual para cada input.</p>
+            <form>
+                <input type="checkbox" id="chk1" value="Opcao 1" name="chbox">
+                <label for="chk1">Opção 1</label><br>
+                <input type="checkbox" id="chk2" value="Opcao 2" name="chbox">
+                <label for="chk2">Opção 2</label><br>
+                <input type="checkbox" id="chk3" value="Opcao 3" name="chbox">
+                <label for="chk3">Opção 3</label><br>
+                <input type="checkbox" id="chk4" value="Opcao 4" name="chbox">
+                <label for="chk4">Opção 4</label><br>
+            </form>
+        </section>
+        <!--POST 9: Upload de Arquivo-->
+        <section id="post9">
+            <h2>POST 9: Solicitar Upload de arquivo</h2>
+            <p>Podemos usar o input type="file" para permitir que o usuário selecione e envie um arquivo. </p>
+            <form>
+                <input type="file" id="fileupload" name="upload">
+            </form>
+        </section>
+        <!--POST 10: Menu Suspenso-->
+        <section id="post10">
+            <h2>POST 10: Inserindo Menu de Seleção Suspenso</h2>
+            <p>Dessa vez não usaremos o 'input', mas sim o comando 'select'.</p>
+            <form>
+                <select name="suspense" id="pst9">
+                    <option value="alternativa 1">número 1</option>
+                    <option value="alternativa 2">número 2</option>
+                    <option value="alternativa 3">número 3</option>
+                    <option value="alternativa 4">número 4</option>
+                    <option value="alternativa 5">número 5</option>
+                </select>
+            </form>
+        </section>
+        <!--POST 11: Adicionando Imagens e Legenda-->
+        <section id="post11">
+            <h2>POST 11: Adicionando Imagens</h2>
+            <p>Vamos adicionar uma imagem com o comando: img src="caminho" (ATENÇÃO! Para colocar o caminho, quando o arquivo estiver em alguma pasta, comece colocando um ponto "." e depois indique os diretórios conforme o próprio VSCode recomenda ou manualmente, mas lembre que as barras são invertidas "/").</p>
+            <figure>
+                <img src="./imagens/tecnologia02.png" alt="desktop com linhas de códigos nas telas" title="desktop com linhas de códigos nas tela">
+            
+                <figcaption>Fig1. Desktop com códigos em tela. Essa descrição foi feita com o comando figcaption. Além disso, o parâmetro alt="" permite colocar a descrição da imagem, importante recurso de acessibilidade, e title="" permite estampar uma etiqueta que aparecerá ao deixar o cursor na imagem.</figcaption>
+            </figure>
+        </section>
+        <!--POST 12: Tabelas-->
+        <section id="post12">
+            <h2>POST 12: Tabelas</h2>
+            <p>Para tabelas, usaremos os comandos 'table' com parâmetro de borda (border=""), e definiremos, assim como no resto do código, thead, tbody e tfoot. Em cada secção da tabela, deverão ser inseridas as rows com 'tr' seguidas das colunas 'th' ou 'td' (sendo a primeira em negrito). os comandos rowspan="" e colspan="" irão permitir a mesclagem do número de linhas ou colunas desejados.</p>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Pontuação</th>
+                        <th>Avaliação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>0-4</td>
+                        <td>Reprovado</td>
+                    </tr>
+                    <tr>
+                        <td>5-6</td>
+                        <td>Em Recuperação</td>
+                    </tr>
+                    <tr>
+                        <td>7-10</td>
+                        <td>Aprovado</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="2">No caso de reprovação, o aluno deverá pagar uma taxa para poder cursar a matéria novamente </td>
+                    </tr>
+                </tfoot>
+             
+            </table>
+        </section>
+        <!--POST 13: Formulário de Feedback -->
+        <section id="post13">
+            <h2>POST 13: Formulário de Feedback</h2>
+            <p>Aqui criaremos um formulário, unindo vários dos conhecimentos anteriores, para permitir um usuário a realizar um feedback. Perceba no código que o input virá após o label, tendo em vista que dessa vez teremos que informar o que será digitado pelo usuário</p>
+            <form>
+                <fieldset>
+                <legend>Informações de contato</legend>
+                <br>
+                <label for="Name">Nome:</label>
+                <input type="text" id="Name" name="Name">
+                <br><br>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+                <br><br>
+                <label for="comentarios">Comentários:</label>
+                <br><br>
+                <textarea id="comentarios" name="comentarios" rows="4" cols="50" placeholder="Digite seus comentários aqui..."></textarea>
+                <br><br>
+                <button onclick="alert('Feedback enviado')">Clique para Enviar</button>
+                </fieldset>
+            </form>
+            <p>Neste formulário, utilizamos 'fieldset' para definir uma área que englobasse todos os campos, 'legend' para inserir informações junto à linha de borda (<i>informações de contato</i>), 'textarea' ao invés de 'input type' na área de comentários para dar mais espaço ao usuário, e 'button' para criar um botão de envio. </p>
+            <p>OBS: o parâmetro 'onclick="alert('Feedback enviado') presente no comando do botão faz parte de uma funcionalidade integrada ao JavaScript, que não é o foco agora.</p>
+        </section>
+        <!--POST 14: Caracteres Especiais e Links-->
+        <section id="post14">
+            <h2>POST 14: Caracteres Especiais e Links</h2>
+            <p>Para digitar um caracter especial no código html, pode-se usar uma combinação de '&'+ determinadas letras e ";". Exemplo: para o símbolo de "&lt" usaremos '&' + 'lt;' para o ">" usaremos '&'+ 'gt;'. para copyright use '&'+ 'copy;' </p>
+            
+            <p>Para acessar outros arquivos, <a href="https://www.google.com/" target="_blank" class="a">Clique aqui.</a></p>
+            <p>Acima, o link foi inserido com o comando &lt;a href='<i>link</i>'&gt;texto&lt;/a&gt; e antes de fechar o 'a href' inserimos target='_blank' para que uma nova aba fosse aberta. </p>
+            <br><br>
+        </section>
+    </main>
+    <footer>
+        <p class="paragrafo-footer">&copy; Código Base de HTML para estudos. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>

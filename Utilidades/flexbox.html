@@ -1,0 +1,470 @@
+```html
+<!-- 
+Aqui, trataremos sobre Flexbox
+
+1) DIFERENÇA ENTRE FLEXBOX E GRID
+Flexbox tem o melhor uso para a criação de layout em uma dimensão, seja horizontal (posicionamento em linhas) ou vertical (posicionamento em colunas), enquanto o Grid funciona melhor para a criação de layout em duas dimensões: linhas e colunas. 
+
+-->
+
+<!-- Aqui veremos o uso de Flexbox -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Demonstração de Flexbox</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111827;
+      color: white;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h2 {
+      max-width: 1000px;
+      margin: 50px auto 15px;
+      color: #facc15;
+    }
+
+    p {
+      max-width: 1000px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+      color: #d1d5db;
+    }
+
+    /*
+      Esta classe será usada em todos os exemplos.
+
+      A propriedade display: flex transforma o container em um flex container.
+      Isso faz com que os elementos filhos diretos dele passem a ser organizados
+      pelo modelo Flexbox.
+    */
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background-color: #374151;
+      padding: 20px;
+      border-radius: 12px;
+      gap: 15px;
+
+      display: flex;
+    }
+
+    /*
+      Cada caixa dentro dos containers recebe a classe "item".
+
+      A classe "item" define estilos gerais que todos os itens terão em comum,
+      como cor, tamanho, alinhamento do texto e bordas arredondadas.
+    */
+    .item {
+      background-color: #3b82f6;
+      color: white;
+      padding: 25px;
+      border-radius: 10px;
+      font-size: 22px;
+      font-weight: bold;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .item:nth-child(2) {
+      background-color: #22c55e;
+    }
+
+    .item:nth-child(3) {
+      background-color: #ef4444;
+    }
+
+    .item:nth-child(4) {
+      background-color: #a855f7;
+    }
+
+    .item:nth-child(5) {
+      background-color: #f97316;
+    }
+
+    /* ========================================================= */
+    /* EXEMPLO 1: display: flex */
+    /* ========================================================= */
+
+    .exemplo-display-flex {
+      /*
+        Por padrão, quando usamos display: flex,
+        os itens são organizados em linha, da esquerda para a direita.
+
+        É como se o navegador aplicasse automaticamente:
+        flex-direction: row;
+      */
+      display: flex;
+    }
+
+    /* ========================================================= */
+    /* EXEMPLO 2: flex-direction: row */
+    /* ========================================================= */
+
+    .exemplo-row {
+      /*
+        flex-direction: row organiza os itens em linha.
+
+        Essa é a direção padrão do Flexbox.
+        Os itens ficam lado a lado, da esquerda para a direita.
+      */
+      flex-direction: row;
+    }
+
+    /* ========================================================= */
+    /* EXEMPLO 3: flex-direction: column */
+    /* ========================================================= */
+
+    .exemplo-column {
+      /*
+        flex-direction: column organiza os itens em coluna.
+
+        Em vez de ficarem lado a lado, os itens ficam um embaixo do outro.
+      */
+      flex-direction: column;
+    }
+
+    /* ========================================================= */
+    /* EXEMPLO 4: flex-direction: row-reverse */
+    /* ========================================================= */
+
+    .exemplo-row-reverse {
+      /*
+        flex-direction: row-reverse organiza os itens em linha,
+        mas inverte a ordem visual.
+
+        O primeiro item aparece no lado direito, e os demais seguem para a esquerda.
+      */
+      flex-direction: row-reverse;
+    }
+
+    /* ========================================================= */
+    /* EXEMPLO 5: flex-direction: column-reverse */
+    /* ========================================================= */
+
+    .exemplo-column-reverse {
+      /*
+        flex-direction: column-reverse organiza os itens em coluna,
+        mas inverte a ordem visual.
+
+        O primeiro item aparece embaixo, e os demais seguem para cima.
+      */
+      flex-direction: column-reverse;
+    }
+
+    /* ========================================================= */
+    /* EXEMPLO 6: justify-content */
+    /* ========================================================= */
+
+    .exemplo-justify-center {
+      /*
+        justify-content alinha os itens no eixo principal.
+
+        Quando usamos flex-direction: row, o eixo principal é horizontal.
+        Portanto, justify-content: center centraliza os itens horizontalmente.
+      */
+      justify-content: center;
+    }
+
+    .exemplo-justify-between {
+      /*
+        space-between coloca o primeiro item no início,
+        o último item no final e distribui o espaço entre os itens.
+      */
+      justify-content: space-between;
+    }
+
+    .exemplo-justify-around {
+      /*
+        space-around cria espaços ao redor de cada item.
+
+        Os espaços das extremidades existem, mas são menores do que
+        os espaços entre os itens.
+      */
+      justify-content: space-around;
+    }
+
+    .exemplo-justify-evenly {
+      /*
+        space-evenly distribui os espaços de forma igual.
+
+        O espaço antes do primeiro item, entre os itens e depois do último
+        fica com o mesmo tamanho.
+      */
+      justify-content: space-evenly;
+    }
+
+    /* ========================================================= */
+    /* EXEMPLO 7: flex-flow */
+    /* ========================================================= */
+
+    .exemplo-flex-flow {
+      /*
+        flex-flow é uma propriedade abreviada.
+
+        Ela junta duas propriedades:
+        flex-direction + flex-wrap
+
+        Ou seja, em vez de escrever:
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        Podemos escrever:
+        flex-flow: row wrap;
+      */
+      flex-flow: row wrap;
+    }
+
+    .exemplo-flex-flow .item {
+      /*
+        Aqui definimos uma largura para os itens.
+
+        Como os itens têm uma largura grande, eles não cabem todos
+        na mesma linha. Por isso, graças ao wrap, eles quebram para
+        a próxima linha.
+      */
+      width: 220px;
+    }
+
+    /* ========================================================= */
+    /* EXEMPLO 11: Mesclando três elementos dentro de cada bloco */
+    /* ========================================================= */
+
+    .exemplo-cards {
+      /*
+        Este container também usa Flexbox.
+
+        Aqui, o objetivo é organizar vários blocos, chamados de cards,
+        lado a lado dentro do mesmo container.
+      */
+      justify-content: space-between;
+      align-items: stretch;
+    }
+
+    .card {
+      /*
+        Cada card é um bloco dentro do container principal.
+
+        Além disso, cada card também usa Flexbox internamente.
+        Ou seja, temos um Flexbox dentro de outro Flexbox.
+
+        O container externo organiza os cards lado a lado.
+        O card organiza seus três elementos internos em coluna.
+      */
+      background-color: #1f2937;
+      border-radius: 12px;
+      padding: 20px;
+      width: 30%;
+
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .card h3 {
+      margin: 0;
+      color: #facc15;
+      font-size: 24px;
+    }
+
+    .card p {
+      margin: 0;
+      color: #d1d5db;
+      line-height: 1.5;
+    }
+
+    .card button {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background-color: #3b82f6;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background-color: #2563eb;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Demonstração de Flexbox</h1>
+
+  <h2>Exemplo 1: display: flex</h2>
+
+  <p>
+    O display: flex transforma uma div comum em um flex container.
+    Os elementos filhos diretos passam a ser organizados lado a lado por padrão.
+  </p>
+
+  <div class="container exemplo-display-flex">
+    <div class="item">Item 1</div>
+    <div class="item">Item 2</div>
+    <div class="item">Item 3</div>
+  </div>
+
+  <h2>Exemplo 2: flex-direction: row</h2>
+
+  <p>
+    O valor row organiza os itens em linha, da esquerda para a direita.
+    Esse é o comportamento padrão do Flexbox.
+  </p>
+
+  <div class="container exemplo-row">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <h2>Exemplo 3: flex-direction: column</h2>
+
+  <p>
+    O valor column organiza os itens em coluna, um embaixo do outro.
+  </p>
+
+  <div class="container exemplo-column">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <h2>Exemplo 4: flex-direction: row-reverse</h2>
+
+  <p>
+    O valor row-reverse organiza os itens em linha, mas inverte a ordem visual.
+  </p>
+
+  <div class="container exemplo-row-reverse">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <h2>Exemplo 5: flex-direction: column-reverse</h2>
+
+  <p>
+    O valor column-reverse organiza os itens em coluna, mas inverte a ordem visual.
+  </p>
+
+  <div class="container exemplo-column-reverse">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <h2>Exemplo 6: justify-content: center</h2>
+
+  <p>
+    justify-content controla o alinhamento no eixo principal.
+    Com flex-direction: row, ele controla o alinhamento horizontal.
+  </p>
+
+  <div class="container exemplo-justify-center">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <h2>Exemplo 7: justify-content: space-between</h2>
+
+  <p>
+    space-between distribui os itens deixando o primeiro no início,
+    o último no final e o espaço restante entre eles.
+  </p>
+
+  <div class="container exemplo-justify-between">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <h2>Exemplo 8: justify-content: space-around</h2>
+
+  <p>
+    space-around cria espaços ao redor dos itens.
+  </p>
+
+  <div class="container exemplo-justify-around">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <h2>Exemplo 9: justify-content: space-evenly</h2>
+
+  <p>
+    space-evenly distribui todos os espaços igualmente.
+  </p>
+
+  <div class="container exemplo-justify-evenly">
+    <div class="item">1</div>
+    <div class="item">2</div>
+    <div class="item">3</div>
+  </div>
+
+  <h2>Exemplo 10: flex-flow: row wrap</h2>
+
+  <p>
+    flex-flow é uma forma abreviada de escrever flex-direction e flex-wrap.
+    Neste exemplo, usamos row wrap para deixar os itens em linha, mas permitindo
+    que eles quebrem para a próxima linha quando não couberem no container.
+  </p>
+
+  <div class="container exemplo-flex-flow">
+    <div class="item">Item 1</div>
+    <div class="item">Item 2</div>
+    <div class="item">Item 3</div>
+    <div class="item">Item 4</div>
+    <div class="item">Item 5</div>
+  </div>
+
+  <h2>Exemplo 11: Mesclando três elementos dentro de cada bloco</h2>
+
+  <p>
+    Neste exemplo, o container principal usa Flexbox para organizar os cards
+    lado a lado. Cada card possui três elementos internos: um título, um texto
+    e um botão.
+  </p>
+
+  <div class="container exemplo-cards">
+
+    <div class="card">
+      <h3>HTML</h3>
+      <p>HTML é usado para estruturar o conteúdo de uma página.</p>
+      <button>Estudar HTML</button>
+    </div>
+
+    <div class="card">
+      <h3>CSS</h3>
+      <p>CSS é usado para definir cores, tamanhos, posições e estilos.</p>
+      <button>Estudar CSS</button>
+    </div>
+
+    <div class="card">
+      <h3>JavaScript</h3>
+      <p>JavaScript é usado para adicionar interatividade às páginas.</p>
+      <button>Estudar JS</button>
+    </div>
+
+  </div>
+
+</body>
+</html>
+

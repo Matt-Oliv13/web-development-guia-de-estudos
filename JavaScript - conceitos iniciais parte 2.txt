@@ -1,0 +1,1338 @@
+Lembrete: estabelecer como prática o padrão da web: utilizar HTML para a estruturação de conteúdo. Ao formatar, utilize CSS e o comportamento deve ser feito com JavaScript.
+
+TIPOS DE DADOS
+Vimos que literais são formas de representar valores diretamente no código do programa. Já conhecemos alguns dados primitivos: boolean, number, BigInt, string, undefined e null. Agora veremos tipos de dados literais mais complexos: objetos e arrays.
+
+======================================================
+
+1 - OBJETOS / REGISTROS
+O que são?
+Objetos são estruturas de dados parecidas com registros. Eles armazenam coleções de pares chave(propriedade)-valor(dado), delimitadas por chaves {}.
+
+Estrutura básica:
+nomedoobjeto = {chave: valor, chave2: valor2, ...}
+
+Ex:
+let exemploObj = {
+numero: 720, // propriedade/chave 1
+texto: "conteúdo" // propriedade/chave 2
+};
+
+Ou objeto vazio: 
+let produto = {};
+
+É possível acessar os registros individualmente com a chave correspondente:
+
+console.log(exemploObj.numero);   // -> 720
+console.log(exemploObj.texto);    // -> conteúdo
+
+Isso se torna cada vez mais útil ao manipular uma grande quantidade de dados diferentes em um registro. Por exemplo:
+
+let user1 = {
+    nome: "Lucas",
+    sobrenome: "Mendes",
+    idade: 28,
+    email: "lucas.mendes@email.com"
+};
+
+let user2 = {
+    nome: "Clara",
+    sobrenome: "Oliveira",
+    idade: 34,
+    email: "clara.oliveira@email.com"
+};
+
+Podemos visualizar os dados individualmente agora:
+
+Estrutura Básica:
+objeto.propriedade
+
+OU
+
+objeto["propriedade"]
+
+console.log(user1.nome);              // -> Lucas
+console.log(user2.idade);             // -> 34
+console.log(user1["sobrenome"]);      // -> Mendes
+
+=======================================================
+
+1.1 - MUDANÇA DE PROPRIEDADE
+Uma propriedade pode ser alterada após a criação do Objeto:
+
+let pessoa = {nome: "Rafael"};
+
+pessoa.nome = "Bianca";
+
+console.log(pessoa.nome);             // -> retorna Bianca
+
+=======================================================
+
+1.2 - ADICIONANDO UMA NOVA PROPRIEDADE
+Uma propriedade pode ser adicionada após a criação do Objeto usando nomedoobjeto.nomedanovapropriedade:
+
+let pessoa = {nome: "Larissa"};
+
+pessoa.idade = 22;
+
+console.log(pessoa);                  // -> retorna {nome: "Larissa", idade: 22}
+
+========================================================
+
+1.3 - REMOVENDO UMA PROPRIEDADE
+Uma propriedade pode ser removida após a criação do Objeto usando delete nomedoobjeto.propriedade:
+
+let pessoa = {nome: "Larissa", idade: 22};
+
+delete pessoa.idade;
+
+console.log(pessoa);                  // -> retorna {nome: "Larissa"}
+
+=========================================================
+
+1.4 - OBJETOS DENTRO DE OBJETOS
+Um objeto pode ter outro objeto dentro dele.
+
+let pessoa = {
+    nome: "Helena",
+    origem: {
+        cidade: "Curitiba",
+        clima: "Frio"
+    }
+};
+
+Para acessar:
+
+console.log(pessoa.nome);             // -> Helena
+console.log(pessoa.origem.cidade);    // -> Curitiba
+console.log(pessoa.origem.clima);     // -> Frio
+
+=====================================================
+
+1.5 - Usando typeof com objetos
+
+let pessoa = {nome: "Caio", idade: 31};
+
+console.log(typeof pessoa);           // -> object
+
+OBS: o retorno de typeof para objetos aparece como "object", com letra minúscula.
+
+=====================================================
+
+1.6 - MÉTODO ALTERNATIVO
+Podemos criar objetos de outra maneira, primeiro criando um objeto vazio com o operador new e posteriormente adicionando as propriedades.
+
+Exemplo:
+
+var livro = new Object();
+
+livro.titulo = "Guia de JavaScript";
+livro.autor = "Autoria Própria";
+livro.editora = "Editora Exemplo";
+livro.anoPublicacao = 2026;
+livro.edicao = "2ª";
+livro.paginas = 180;
+livro.preco = "R$ 45,00";
+
+livro.frete = function(cepOrigem, cepDestino, peso) {
+    var valorFrete = "valor a calcular";
+
+    // script ilustrativo do cálculo de frete
+
+    return valorFrete;
+};
+
+livro.capitulo1 = "Introdução aos conceitos básicos";
+livro.capitulo2 = "Variáveis e tipos de dados";
+livro.capitulo3 = "Objetos e arrays";
+livro.capitulo4 = "Funções e escopos";
+livro.capitulo5 = "Manipulação do DOM";
+livro.capitulo6 = "Eventos no navegador";
+
+=========================================================
+
+1.7 - OBJETOS DIFERENTES COMPARTILHANDO O MESMO REGISTRO
+Veja este código:
+
+const carro = {
+    marca: "Genérica",
+    preco: 0
+};
+
+const toyota = carro;
+
+Parece que toyota virou uma cópia de carro. Mas não virou. Na verdade, toyota e carro estão apontando para o mesmo objeto.
+
+Imagine assim:
+
+carro  ──┐
+         ├──> { marca: "Genérica", preco: 0 }
+toyota ──┘
+
+Então, se você fizer:
+
+toyota.marca = "Toyota";
+
+você altera o mesmo objeto.
+
+Agora:
+
+console.log(carro.marca);     // -> Toyota
+console.log(toyota.marca);    // -> Toyota
+
+Agora se fizéssemos:
+
+const carro = {
+    marca: "Genérica",
+    preco: 0
+};
+
+const toyota = carro;
+
+toyota.marca = "Toyota";
+toyota.preco = 155000;
+
+const ford = carro;
+
+ford.marca = "Ford";
+ford.preco = 98000;
+
+Como Ford foi o último a definir as propriedades, as quais são as mesmas apontadas por carro e toyota, teremos:
+
+console.log(carro.marca);     // retorna Ford
+console.log(toyota.marca);    // retorna Ford
+console.log(ford.marca);      // retorna Ford
+
+console.log(carro.preco);     // retorna 98000
+console.log(toyota.preco);    // retorna 98000
+console.log(ford.preco);      // retorna 98000
+
+Ou seja, se não quisermos sobrescrever os dados de um objeto, o ideal é criarmos objetos separados. Mas aí caímos no problema da tarefa poder se tornar repetitiva. Por isso, podemos usar uma função construtora.
+
+========================================================
+
+1.8 - Função construtora
+Uma função construtora é como uma “forma de bolo” para criar objetos parecidos.
+
+function Carro(marca, preco) {
+    this.marca = marca;
+    this.preco = preco;
+}
+
+OBS: o this é necessário para representar o novo objeto que está sendo criado.
+
+Essa função está dizendo:
+Sempre que eu criar um novo objeto chamado Carro(), ele deverá receber uma marca e um preço, NESTA ORDEM.
+
+Então:
+
+const toyota = new Carro("Toyota", 155000);
+const ford = new Carro("Ford", 98000);
+
+É parecido com criar manualmente:
+
+const toyota = {
+    marca: "Toyota",
+    preco: 155000
+};
+
+const ford = {
+    marca: "Ford",
+    preco: 98000
+};
+
+Assim, criamos objetos separados que não irão se sobrescrever e podemos agilizar a inserção de seus parâmetros usando a ordem estabelecida na função.
+
+Ex:
+
+const toyota = new Carro("Toyota", 155000);
+const ford = new Carro("Ford", 98000);
+
+console.log(toyota.marca);    // retorna Toyota
+console.log(ford.marca);      // retorna Ford
+
+console.log(toyota.preco);    // retorna 155000
+console.log(ford.preco);      // retorna 98000
+
+=======================================================
+
+1.9 - ITERANDO COM LAÇO FOR...IN
+O laço for...in pode ser usado para passar por cada chave enumerável de um objeto.
+
+A estrutura é:
+
+for (let variavel in objeto) {
+    // código
+}
+
+Vamos a um exemplo:
+
+let carro = {
+    portas: 4,
+    rodas: 4,
+    marca: "Modelo Exemplo",
+    eletrico: false
+};
+
+for (let chave in carro) {
+    console.log(chave + ": " + carro[chave]);
+}
+
+Ou seja, para cada propriedade dentro do objeto carro, exiba o nome dessa propriedade + ": " + o valor da propriedade.
+
+OBS: for...in é mais indicado para objetos. Para arrays, geralmente usamos for, for...of ou métodos próprios de array.
+
+=======================================================
+
+2 - ARRAYS
+Em arrays, podemos armazenar vários valores em uma mesma estrutura, porém acessamos esses valores por índice numérico, e não por uma chave personalizada como fazemos em objetos.
+
+Usamos colchetes [] ao invés das chaves {}.
+
+Exemplos:
+
+let dias = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
+
+console.log(dias[0]);         // -> Dom
+console.log(dias[3]);         // -> Qua
+
+let frutas = [];
+
+frutas[0] = "laranja";
+frutas[2] = "manga";
+
+console.log(frutas[0]);       // -> laranja
+console.log(frutas[1]);       // -> undefined
+console.log(frutas[2]);       // -> manga
+
+OBS: quando pulamos um índice, como no exemplo frutas[1], o valor fica como undefined.
+
+=======================================================
+
+2.1 - OBJETOS DENTRO DE ARRAYS
+Os elementos de um Array podem ser quaisquer dados, incluindo um Objeto {}!
+
+Ex:
+
+let usuarios = [
+    {nome: "Renata", idade: 26},
+    {nome: "Bruno", idade: 41}
+];
+
+console.log(usuarios[0]);          // -> {nome: "Renata", idade: 26}
+console.log(usuarios[0].nome);     // -> Renata
+
+=======================================================
+
+2.2 - ADICIONANDO NOVO ITEM AO ARRAY
+Podemos adicionar novos itens atribuindo-os a um índice.
+
+Ex:
+
+let frutas = ["maçã", "uva"];
+
+frutas[2] = "pera";
+
+console.log(frutas);               // -> ['maçã', 'uva', 'pera']
+
+Cuidado:
+Se frutas[2] = ["pera"], estaremos adicionando um array com 1 elemento ("pera") dentro do array.
+
+EXTRA length
+Podemos utilizar length para verificar a quantidade de elementos de um array ou a quantidade de caracteres de uma string.
+
+let nomes = ["Rafaela", "Bianca", "Daniel", "Sofia"];
+
+console.log(nomes.length);         // -> 4
+console.log(nomes[0].length);      // -> 7
+
+========================================================
+
+2.3 - MÉTODOS:
+
+indexOf()
+Podemos utilizar indexOf para verificar o índice onde se encontra posicionado um valor no array:
+
+let nomes = ["Rafaela", "Bianca", "Daniel", "Sofia"];
+
+console.log(nomes.indexOf("Rafaela"));      // -> 0
+console.log(nomes.indexOf("Sofia"));        // -> 3
+
+push()
+Podemos utilizar push para inserir um valor na posição final do array.
+
+Continuando com o exemplo anterior:
+
+nomes.push("Igor");
+
+console.log(nomes);                         // -> ['Rafaela', 'Bianca', 'Daniel', 'Sofia', 'Igor']
+
+unshift()
+O método unshift é similar ao método push, com a diferença que adiciona um elemento na primeira posição do array:
+
+nomes.unshift("Marina");
+
+console.log(nomes);                         // -> ['Marina', 'Rafaela', 'Bianca', 'Daniel', 'Sofia', 'Igor']
+
+pop()
+O método pop() permite eliminar o último elemento do array:
+
+let nomes = ["Rafaela", "Bianca", "Daniel"];
+
+let nome = nomes.pop();
+
+console.log(nomes.length);                  // -> 2
+console.log(nome);                          // -> Daniel
+console.log(nomes);                         // -> ['Rafaela', 'Bianca']
+
+shift()
+O método shift() é similar ao pop, porém permite eliminar o primeiro elemento do array:
+
+let nomes = ["Rafaela", "Bianca", "Daniel"];
+
+let nome = nomes.shift();
+
+console.log(nomes.length);                  // -> 2
+console.log(nome);                          // -> Rafaela
+console.log(nomes);                         // -> ['Bianca', 'Daniel']
+
+reverse()
+O método reverse() inverte a ordem dos elementos do array:
+
+let nomes = ["Rafaela", "Bianca", "Daniel"];
+
+nomes.reverse();
+
+console.log(nomes);                         // -> ['Daniel', 'Bianca', 'Rafaela']
+
+slice()
+O método slice() permite criar um novo array a partir de elementos selecionados de outro array:
+
+let nomes = ["Rafaela", "Bianca", "Daniel", "Sofia"];
+
+let e1 = nomes.slice(2);
+let e2 = nomes.slice(1, 3);
+
+console.log(e1);                            // -> ['Daniel', 'Sofia']
+
+// Como criamos um novo array colocando apenas 2,
+// tudo a partir da posição 2 foi incluído no novo array.
+
+console.log(e2);                            // -> ['Bianca', 'Daniel']
+
+// Como criamos um novo array definindo 1 como ponto inicial
+// e 3 como ponto final, nosso novo array só irá conter
+// os elementos [1] e [2], não contando o [3].
+
+concat()
+O método concat() cria um novo array juntando elementos de arrays.
+
+let nomes = ["Rafaela", "Bianca", "Daniel"];
+let maisNomes = ["Henrique", "Laura"];
+
+let nomesJuntos = nomes.concat(maisNomes);
+
+console.log(nomesJuntos);                   // -> ['Rafaela', 'Bianca', 'Daniel', 'Henrique', 'Laura']
+
+=======================================================
+
+2.4 - COMO ITERAR POR LISTAS
+
+LAÇO FOR
+Sintaxe:
+
+for (início; condição; atualização da variável) {
+    // bloco de código
+}
+
+Usando for:
+
+let valores = [15, 25, 60];
+let soma = 0;
+
+for (let i = 0; i < valores.length; i++) {
+    soma += valores[i];
+}
+
+// Ou seja, para i começando em 0,
+// continue enquanto i for menor que o tamanho do array,
+// e incremente i de 1 em 1.
+//
+// operação: i = i + 1
+
+console.log(soma);                          // -> 100
+
+LAÇO FOR ... OF
+Além do loop for regular, existe o for...of, que é muito usado com arrays. Em um loop desse tipo, não precisamos informar diretamente o número de repetições, pois ele percorre automaticamente cada elemento do array indicado.
+
+Sintaxe:
+
+for (variavel of array) {
+    bloco de código
+}
+
+Vamos a um exemplo:
+
+let usuarios = [
+    {
+        nome: "Lucas",
+        sobrenome: "Mendes",
+        idade: 28,
+        email: "lucas.mendes@email.com"
+    },
+    {
+        nome: "Clara",
+        sobrenome: "Oliveira",
+        idade: 34,
+        email: "clara.oliveira@email.com"
+    }
+];
+
+for (let pessoa of usuarios) {
+    console.log(pessoa);
+}
+
+Vamos somar os elementos de um array:
+
+let valores = [15, 25, 60];
+let soma = 0;
+
+for (let numero of valores) {
+    soma += numero;
+}
+
+console.log(soma);                          // -> 100
+
+A diferença do for...of:
+Criamos uma variável, nesse caso numero, para armazenar temporariamente cada valor do array valores.
+Executamos o bloco que soma os valores.
+
+=========================================================
+
+FUNÇÕES
+
+=========================================================
+
+É um pedaço separado de código que você nomeia, da mesma forma que nomeia uma variável, podendo chamar a função depois referenciando seu nome.
+
+Sintaxe:
+
+function nome([parametro[, parametro[, ... parametro]]]) {
+    instruções
+}
+
+Exemplo:
+
+function olaMundo() {
+    console.log("Olá");
+    console.log("Mundo");
+}
+
+olaMundo();
+
+// -> chama a função, retornando:
+// Olá
+// Mundo
+
+Se você declarar uma variável dentro de uma função, usando let ou var, ela ficará visível dentro do escopo da função. Isso é muito útil porque as variáveis usadas dentro de uma função geralmente não precisam existir fora dela.
+
+a) Return
+Podemos utilizar a palavra return nas funções. A função termina onde está a palavra return e permite armazenar em uma variável o resultado da função.
+
+Exemplo:
+
+function mostrarMsg() {
+    console.log("mensagem A");
+    return;
+    console.log("mensagem B");
+}
+
+mostrarMsg();
+
+// -> retorna mensagem A
+// A mensagem B não será exibida.
+
+b) Parâmetros e Argumentos de função
+O uso de parâmetros é opcional. Nos exemplos anteriores, não utilizamos parâmetros.
+
+Em JavaScript, os parâmetros de uma função aparecem em sua declaração.
+Parâmetros dentro de uma função são tratados como variáveis locais.
+
+Uma função pode ser chamada com argumentos. Os valores dados durante uma chamada de função são chamados de argumentos. Os argumentos, se houver mais de um, são separados por vírgulas e devem ser passados na mesma ordem dos parâmetros definidos na declaração da função.
+
+OBS: JavaScript permite chamar funções com menos ou mais argumentos do que os parâmetros declarados, mas o ideal é respeitar a estrutura esperada pela função para evitar resultados inesperados.
+
+Ex:
+
+function somar(num1, num2) {
+    // Função somar com parâmetros num1 e num2
+
+    return num1 + num2;
+}
+
+console.log(somar(18, 7));          // -> 25
+
+Chamada da função:
+somar com os argumentos 18 e 7.
+
+c) Recursividade
+Um fatorial é uma função indicada por um ponto de exclamação em notação matemática.
+Passamos um inteiro positivo para esta função e seu resultado é obtido multiplicando todos os inteiros do número informado até chegar em 1.
+
+Um fatorial é definido da seguinte forma:
+
+n! = n * (n - 1) * (n - 2) * ... * 2 * 1
+
+Assim, por exemplo, o fatorial de 5 é:
+
+5! = 5 * 4 * 3 * 2 * 1 = 120
+
+Vamos escrever uma função que calcula o fatorial de um determinado número. Ela receberá o parâmetro n e retornará o valor calculado.
+
+function fatorial(n) {
+    let resultado = 1;
+
+    while (n > 1) {
+        resultado *= n;
+        n--;
+    }
+
+    return resultado;
+}
+
+console.log(fatorial(5));           // -> 120
+
+O que foi feito no exemplo foi basicamente determinar que o resultado começaria em 1 e, a cada loop, ele seria multiplicado por n, que seria diminuído em 1 a cada repetição até que seu valor chegasse em 1:
+
+resultado = resultado * n
+
+1   = 1 * 5
+5   = 5 * 4
+20  = 20 * 3
+60  = 60 * 2
+120 = 120 * 1
+
+No entanto, podemos trabalhar com funções que chamam a si mesmas dentro de seu escopo para resolver esse tipo de exercício:
+
+function fatorial(n) {
+    return n > 1 ? n * fatorial(n - 1) : 1;
+}
+
+console.log(fatorial(5));           // -> 120
+
+? = operador ternário que significa "Se verdadeiro, execute"
+: = operador ternário que significa "Se falso, execute"
+
+Então, se n > 1, o código executa:
+
+n * fatorial(n - 1)
+
+Se n <= 1, o código retorna:
+
+1
+
+Ou seja:
+
+n * (n - 1 * (n - 2 * (n - 3 * (n - 4 * (... * 1)))))
+
+pois quando n = 1, o código retorna 1.
+
+Para o exemplo do argumento 5:
+
+5 * (4 * (3 * (2 * (1)))) = 120
+
+ATENÇÃO!
+Funções recursivas devem ser utilizadas com cuidado, pois chamam a si mesmas. Se não houver uma condição clara de parada, podem entrar em loop infinito.
+
+d) Função arrow (seta)
+Forma mais curta de escrever uma função, principalmente quando ela é simples.
+
+Uma expressão de função de seta é composta de:
+parênteses contendo ou não parâmetros;
+uma seta "=>";
+e o corpo da função, que pode ser colocado entre chaves { } se houver mais de uma instrução.
+
+Estrutura Básica:
+
+const nomeDaFuncao = (parametros) => {
+    // código
+};
+
+OBS:
+Se o código não estiver entre { }, o resultado será retornado implicitamente.
+Caso haja { }, não esqueça de usar return quando quiser devolver um valor.
+
+Exemplo:
+
+let soma = (n1, n2) => n1 + n2;
+
+console.log(soma(4, 6));            // -> Retorna 10
+
+Outro exemplo:
+
+let dobro = numero => numero * 2;
+
+console.log(dobro(8));              // -> Retorna 16
+
+e) Objeto Date()
+É um construtor de datas e horários. Datas e horários são extraídos do sistema operacional do usuário.
+
+A data-hora de 1º de janeiro de 1970 às 00:00:00 UTC é a hora inicial ou data base para contagem do tempo. Essa referência é conhecida como Unix Time ou Unix Epoch.
+
+Essa data é a referência para contagem de tempo passado ou futuro. É expressa em quantidade de milissegundos decorridos desde a data base até o instante considerado.
+
+Uma hora em milissegundos é 3.600.000.
+
+1 h = 60 min * 60 s * 1000 milissegundos
+
+Vamos criar um objeto Date:
+
+const agora = new Date();
+
+alert(agora);                       // -> retorna a data e hora atuais do sistema
+
+No exemplo acima, utilizamos o construtor Date sem passar argumentos. Observe que ele criou um objeto com a data-hora atual.
+
+Métodos do Objeto Date():
+
+.getDate()       - retorna o dia do mês (1 a 31)
+.getDay()        - retorna o dia da semana (0 a 6)
+.getFullYear()   - retorna o ano (4 dígitos)
+.getHours()      - retorna a hora (0 a 23)
+.getMonth()      - retorna o mês (0 a 11, cuidado pois 0 = janeiro e 11 = dezembro)
+.getTime()       - retorna o número de milissegundos transcorridos entre o objeto Date e a hora base 01 de jan 1970.
+
+Ex:
+Quantos dias faltam para o Natal:
+
+var hoje, anoCorrente, diaNatal, diferenca, umDia, diasFaltando;
+
+// instanciamento das variáveis
+
+hoje = new Date();
+
+// criamos a hora e data atual
+
+anoCorrente = hoje.getFullYear();
+
+// armazenamos o ano corrente numa variável
+
+diaNatal = new Date(anoCorrente, 11, 25);
+
+// criamos o dia do natal:
+// dia 25, mês 11, pois dezembro é representado pelo número 11
+
+if (hoje > diaNatal) {
+    diaNatal = new Date(anoCorrente + 1, 11, 25);
+}
+
+// se o Natal do ano corrente já passou,
+// calculamos o Natal do ano seguinte
+
+diferenca = diaNatal.getTime() - hoje.getTime();
+
+// armazenamos a diferença em milissegundos entre o Natal e o dia de hoje
+
+umDia = 24 * 60 * 60 * 1000;
+
+// armazenamos o tempo de um dia em milissegundos
+
+diasFaltando = Math.ceil(diferenca / umDia);
+
+// calculamos quantos dias faltam para o Natal.
+// Math.ceil() é uma função do JavaScript que arredonda um número para cima.
+
+console.log(diasFaltando);
+
+setTimeout()
+Método que chama uma função após um determinado tempo em milissegundos.
+
+1 segundo = 1000 milissegundos.
+
+O método é executado apenas uma vez.
+
+Sintaxe:
+
+setTimeout(função, milissegundos);
+
+Exemplo no HTML:
+
+<html>
+    <body>
+        <h1>Método setTimeout()</h1>
+
+        <p>Clique no botão. Aguarde 2 segundos pelo alerta "Olá, mundo!".</p>
+
+        <button onclick="minhaFuncao()">Teste</button>
+
+        <!-- onclick é um evento e ao clicar ele executa a função minhaFuncao() -->
+
+        <script type="text/javascript">
+            // JavaScript executado no HTML interno deve estar entre as tags <script> e </script>
+
+            let timeout;
+
+            // cria uma variável timeout
+
+            function minhaFuncao() {
+                timeout = setTimeout(alertaMensagem, 2000);
+            }
+
+            function alertaMensagem() {
+                alert("Olá, mundo!");
+            }
+        </script>
+    </body>
+</html>
+
+setInterval()
+Método que chama uma função em intervalos determinados em milissegundos.
+
+1 segundo = 1000 milissegundos.
+
+Para interromper é necessário chamar clearInterval() ou fechar a janela.
+
+Sintaxe:
+
+setInterval(function, milliseconds);
+
+Exemplo:
+
+<html>
+    <body>
+        <h1>Métodos setInterval() e clearInterval()</h1>
+
+        <p>Neste exemplo, o método setInterval() executa a função trocarCor() uma vez a cada 500 milissegundos para alternar entre duas cores de fundo.</p>
+
+        <button onclick="pararCor()">Parar alternância de cor</button>
+
+        <script type="text/javascript">
+            let meuIntervalo = setInterval(trocarCor, 500);
+
+            function trocarCor() {
+                let x = document.body;
+
+                // document.body representa o elemento <body> do documento
+
+                x.style.backgroundColor = x.style.backgroundColor == "lightgray" ? "white" : "lightgray";
+            }
+
+            // style.backgroundColor define uma cor de fundo para o documento.
+
+            function pararCor() {
+                clearInterval(meuIntervalo);
+
+                // clearInterval() finaliza setInterval()
+            }
+        </script>
+    </body>
+</html>
+
+=======================================================
+
+BOM (BROWSER OBJECT MODEL)
+
+=======================================================
+
+O BOM representa recursos do navegador, não diretamente o HTML.
+
+É um conjunto de objetos que permitem a interação entre JavaScript e navegador. Ele fornece acesso às características do navegador, como janelas, histórico, cookies e outros recursos.
+
+Com o BOM, é possível criar aplicações web mais interativas e dinâmicas, como janelas de diálogo, pop-ups e controle de navegação.
+
+No entanto, o BOM é específico do navegador e pode ter diferenças dependendo do navegador ou da versão usada.
+
+Objeto Window
+O objeto de nível mais elevado do BOM é o window. Ele representa uma janela aberta do navegador.
+
+1.1 - Método Open
+Abre uma nova janela ou aba.
+
+Abrir janelas sem o consentimento do usuário deve ser evitado. Além disso, muitos navegadores bloqueiam pop-ups automáticos.
+
+Sintaxe:
+
+window.open(URL, name, specs, replace);
+
+Os parâmetros são opcionais. Caso não informados, abre uma nova janela em branco.
+
+No exemplo abaixo, abriremos um site por meio de um botão:
+
+<html>
+    <head>
+        <script>
+            let novaJanela;
+
+            // abaixo vamos criar a função abreJanela()
+
+            function abreJanela() {
+                novaJanela = window.open("https://developer.mozilla.org", "_blank", "width=500,height=400");
+
+                // passamos os parâmetros:
+                // URL do site,
+                // _blank para abrir nova janela/aba,
+                // width para largura,
+                // height para altura.
+            }
+        </script>
+    </head>
+
+    <body>
+        <button onclick="abreJanela()">Abrir Janela</button>
+
+        <!-- Chamamos a função abreJanela() no evento onclick do botão -->
+    </body>
+</html>
+
+1.2 - Método Close
+Fecha uma janela aberta via script.
+
+Exemplo, aproveitando o código acima:
+
+<html>
+    <head>
+        <script>
+            let novaJanela;
+
+            function abreJanela() {
+                novaJanela = window.open("https://developer.mozilla.org", "_blank", "width=500,height=400");
+            }
+
+            function fechaJanela() {
+                if (novaJanela) {
+                    novaJanela.close();
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <button onclick="abreJanela()">Abrir Janela</button>
+        <button onclick="fechaJanela()">Fechar Janela</button>
+
+        <!-- chamamos a função fechaJanela() -->
+    </body>
+</html>
+
+1.3 - Propriedade Closed
+Retorna o valor booleano true se a janela estiver fechada e false se estiver aberta.
+
+Exemplo:
+
+<html>
+    <head>
+        <script type="text/javascript">
+            var janelaAberta = window.open("", "", "width=400,height=200");
+
+            // na linha acima criamos uma janela com o método open.
+
+            function testarJanela() {
+                if (janelaAberta.closed) {
+                    alert("A janela foi fechada");
+                } else {
+                    alert("A janela está aberta");
+                }
+            }
+        </script>
+    </head>
+
+    <body>
+        <button type="button" onclick="testarJanela()">Testar janela</button>
+
+        <!-- no evento onclick chamamos a função testarJanela() -->
+    </body>
+</html>
+
+1.4 - Propriedade Onload
+Ocorre quando uma página termina de ser carregada.
+
+No exemplo a seguir, faremos com que os campos do formulário sejam preenchidos automaticamente pelos dados colocados assim que a página for carregada:
+
+<html>
+    <head>
+        <script>
+            window.onload = function() {
+                document.forms[0].elements[0].value = "Marina";
+                document.forms[0].elements[1].value = "Costa";
+            };
+        </script>
+    </head>
+
+    <body>
+        <form action="" method="get">
+            <input type="text" />
+            <input type="text" />
+        </form>
+    </body>
+</html>
+
+1.5 - Propriedade Document
+A propriedade document é uma referência ao objeto document que representa a marcação HTML de um documento apresentado na janela do navegador.
+
+É possível acessar todos os elementos da marcação via script. Veremos isso mais à frente com o DOM.
+
+2 - Objeto History
+O objeto history contém as URLs visitadas pelo usuário na janela ou aba atual do navegador.
+
+Sintaxe:
+
+window.history.método;
+
+history.método;
+
+Métodos:
+
+.back()       - carrega a última URL visitada
+.forward()    - carrega a URL visitada depois da atual
+.go(n)        - admite número como parâmetro, incluindo valores negativos
+
+Propriedade:
+
+.length       - verifica a quantidade de páginas no histórico da aba atual
+
+Ex:
+
+<html>
+    <body>
+        <h1>History</h1>
+
+        <button onclick="history.back()">Voltar</button>
+        <button onclick="history.forward()">Avançar</button>
+        <button onclick="history.go(2)">Avançar 2 páginas</button>
+    </body>
+</html>
+
+=======================================================
+
+DOM (Document Object Model)
+
+=======================================================
+
+O DOM representa o documento HTML carregado na página.
+
+Ele é uma interface independente de plataforma e linguagem que permite aos programas e scripts acessar e atualizar dinamicamente a estrutura, o conteúdo e a estilização de documentos.
+
+O DOM HTML é uma representação da estrutura do documento HTML. O diagrama representativo do DOM é do tipo árvore.
+
+O DOM padroniza a estrutura de documentos HTML, simplificando a tarefa de acessar e manipular esses documentos.
+
+Na prática:
+
+* O HTML é o código/texto original da página.
+* O DOM é a representação desse HTML em forma de objetos que o JavaScript consegue acessar e modificar.
+Objeto Document
+O objeto document representa um documento aberto no navegador.
+
+Assim, quando abrimos um documento HTML em um navegador, é criado um objeto document. Esse objeto é uma propriedade do objeto window e pode ser acessado com a sintaxe window.document ou apenas document, pois o navegador permite acessar o document diretamente.
+
+Desta maneira, podemos acessar todos os elementos HTML de uma página HTML.
+
+Pense o seguinte:
+
+O window é a janela do navegador, sendo o objeto mais "geral".
+O document é a representação do documento HTML carregado dentro da janela.
+
+A relação é mais ou menos assim:
+
+window
+    ├── location
+    ├── history
+    ├── navigator
+    └── document
+            └── html
+                └── body
+                    ├── h1
+                    ├── p
+                    └── button
+
+É por meio do document que iremos acessar o HTML da página!
+
+MÉTODOS
+
+2.1 - Métodos 'getElement'
+
+a) getElementById()
+Acessa o elemento DOM identificando o id.
+
+O ID é um identificador único, exclusivo no documento.
+
+IMPORTANTE:
+A palavra Element está no singular pois só 1 elemento deve ser identificado.
+
+Exemplo de HTML:
+
+<h1 id="titulo">Olá, mundo!</h1>
+
+JavaScript:
+
+let titulo = document.getElementById("titulo");
+
+titulo.textContent = "Novo título";
+
+Resultado:
+O texto do muda para:
+
+Novo título
+
+b) getElementsByClassName()
+Acessa os elementos DOM identificando pela classe.
+
+Exemplo de HTML:
+
+<p class="texto">Primeiro parágrafo</p>
+<p class="texto">Segundo parágrafo</p>
+<p class="texto">Terceiro parágrafo</p>
+
+JavaScript:
+
+let textos = document.getElementsByClassName("texto");
+
+textos[0].textContent = "Parágrafo alterado";
+
+// Aqui, textos[0] pega o primeiro elemento com a classe texto.
+
+Resultado:
+
+<p class="texto">Parágrafo alterado</p>
+<p class="texto">Segundo parágrafo</p>
+<p class="texto">Terceiro parágrafo</p>
+
+Diferente do id, uma mesma classe pode aparecer em vários elementos. Por isso, getElementsByClassName() retorna uma coleção de elementos, parecida com uma lista.
+
+Exemplo:
+
+console.log(textos);
+
+Pode mostrar algo como:
+
+HTMLCollection(3)
+
+Isso quer dizer que foram encontrados 3 elementos.
+
+c) getElementsByTagName()
+Acessa os elementos DOM identificando pela tag HTML.
+
+Exemplo de HTML:
+
+<p>Primeiro parágrafo</p>
+<p>Segundo parágrafo</p>
+<p>Terceiro parágrafo</p>
+
+JavaScript:
+
+let paragrafos = document.getElementsByTagName("p");
+
+paragrafos[1].textContent = "Segundo parágrafo alterado";
+
+// Aqui, paragrafos[1] pega o segundo <p>,
+// porque a contagem começa em zero:
+//
+// paragrafos[0] → primeiro <p>
+// paragrafos[1] → segundo <p>
+// paragrafos[2] → terceiro <p>
+
+Então o resultado seria:
+
+<p>Primeiro parágrafo</p>
+<p>Segundo parágrafo alterado</p>
+<p>Terceiro parágrafo</p>
+
+2.2 - element.style
+A propriedade style dos elementos do DOM permite que se definam regras de estilo.
+
+Sintaxe:
+
+el.style.propriedade = "valor da propriedade";
+
+Em JavaScript, as propriedades CSS devem ser escritas em camelCase, como nos exemplos abaixo:
+
+CSS                    JavaScript
+
+background-color       backgroundColor
+z-index                zIndex
+text-indent            textIndent
+padding-left           paddingLeft
+
+2.3 - querySelector()
+O método querySelector() permite acessar o primeiro elemento correspondente ao seletor informado.
+
+O seletor pode ser uma tag, um id ou uma classe. São os mesmos seletores que estudamos no CSS.
+
+Exemplo HTML:
+
+<button class="botao">Clique aqui</button>
+
+JavaScript:
+
+let botao = document.querySelector(".botao");
+
+botao.textContent = "Enviar";
+
+Resultado:
+O texto do botão muda para:
+
+Enviar
+
+2.4 - querySelectorAll()
+Permite acessar todos os elementos que correspondem ao seletor.
+
+Exemplo:
+
+let paragrafos = document.querySelectorAll("p");
+
+console.log(paragrafos);
+
+OBS:
+querySelectorAll() retorna uma lista de elementos. Para alterar um item específico, usamos o índice.
+
+Exemplo:
+
+paragrafos[0].textContent = "Primeiro parágrafo alterado";
+
+3. PROPRIEDADES
+
+3.1 - textContent
+Permite acessar o texto digitado entre as tags.
+
+Por exemplo, abrimos um site, o console do navegador e digitamos o código abaixo:
+
+let texto = document.querySelector("p").textContent;
+
+console.log(texto);
+
+// Ele irá exibir o conteúdo da primeira tag p do site.
+
+Também permite alterar o conteúdo da tag.
+
+Essa alteração é somente na máquina do usuário!!!
+
+Exemplo:
+
+document.querySelector("p").textContent = "Vamos praticar também";
+
+// altera o conteúdo de p na página localmente.
+
+3.2 - innerHTML
+Permite adicionar HTML dentro do HTML.
+
+Exemplo:
+
+let paragrafo = document.querySelector("p");
+
+paragrafo.innerHTML = "<strong>Olá, DOM!</strong>";
+
+// exibe "Olá, DOM!" em negrito na página.
+
+OBS:
+innerHTML deve ser usado com cuidado, principalmente quando o conteúdo vem de usuários, pois pode gerar problemas de segurança.
+
+=======================================================
+
+EVENTOS
+
+=======================================================
+
+Os eventos podem ocorrer a partir da interação do usuário, como clicar em um link, passar o mouse sobre um elemento ou digitar no teclado, ou podem ocorrer a partir do navegador, como o carregamento de uma página.
+
+Evento é qualquer interação ou acontecimento relacionado a um elemento HTML.
+
+• Eventos de mouse ocorrem quando o usuário interage usando o ponteiro do mouse.
+• Eventos de teclado ocorrem quando o usuário interage utilizando as teclas do teclado.
+• Eventos HTML ocorrem quando há alterações na página ou na janela do navegador.
+
+Exemplos de Eventos:
+
+Evento          Descrição
+
+click           Ocorre quando o usuário pressiona e solta o botão principal do mouse.
+dblclick        Ocorre quando o usuário clica duas vezes rapidamente.
+mousedown       Ocorre quando o usuário pressiona qualquer botão do mouse.
+mouseup         Ocorre quando o usuário solta qualquer botão do mouse.
+mouseover       Ocorre quando o ponteiro do mouse entra sobre um elemento.
+mouseout        Ocorre quando o ponteiro do mouse sai de um elemento.
+mousemove       Ocorre quando o usuário move o ponteiro do mouse.
+load            Ocorre quando há o carregamento da página.
+unload          Ocorre quando há o fechamento ou saída de uma página.
+scroll          Ocorre quando o elemento ou página possui barra de rolagem e ela é movimentada.
+focus           Ocorre quando o elemento recebe foco.
+
+eventListener
+EventListener não é exatamente um evento, mas sim uma forma de escutar eventos.
+
+Os métodos addEventListener e removeEventListener nos permitem anexar ou remover manipuladores de eventos de um elemento sem sobrescrever eventos anteriores.
+
+Sintaxe:
+
+element.addEventListener(event, function, useCapture);
+
+O parâmetro event é o tipo de evento, exemplo: click ou mouseout.
+
+O parâmetro function é a função que queremos chamar.
+
+O parâmetro useCapture é um valor booleano, true ou false, sendo false o padrão. Ele especifica se será usada a fase de captura do evento.
+
+É opcional. No geral, você pode fechar o parêntese após a função.
+
+Pense em uma caixa dentro da outra:
+
+<div id="caixa">
+    <button id="botao">Clique</button>
+</div>
+
+Visualmente:
+
+PÁGINA
+    └── div#caixa
+            └── button#botao
+
+Quando você clica no botão, você também clicou “dentro” da div, porque o botão está dentro dela. Então o navegador precisa decidir a ordem.
+
+a) TRUE - De fora para dentro
+O evento passa primeiro pelos elementos de fora até chegar no botão:
+
+página → div#caixa → button#botao
+
+Isso é captura.
+
+let caixa = document.getElementById("caixa");
+let botao = document.getElementById("botao");
+
+caixa.addEventListener("click", function() {
+    console.log("Caixa");
+}, true);
+
+botao.addEventListener("click", function() {
+    console.log("Botão");
+}, true);
+
+Resultado ao clicar no botão:
+
+Caixa
+Botão
+
+Porque ele veio de fora para dentro.
+
+b) FALSE (PADRÃO) - De dentro para fora
+O evento começa no botão clicado e depois “sobe” para os elementos que contêm ele:
+
+button#botao → div#caixa → página
+
+Isso é borbulhamento.
+
+let caixa = document.getElementById("caixa");
+let botao = document.getElementById("botao");
+
+caixa.addEventListener("click", function() {
+    console.log("Caixa");
+}, false);
+
+botao.addEventListener("click", function() {
+    console.log("Botão");
+}, false);
+
+Resultado ao clicar no botão:
+
+Botão
+Caixa
+
+Porque ele começou no elemento clicado e foi subindo.

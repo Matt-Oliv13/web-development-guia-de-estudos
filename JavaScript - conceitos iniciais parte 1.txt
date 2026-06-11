@@ -1,0 +1,315 @@
+**Sobre JavaScript**
+
+JavaScript é uma linguagem de programação muito utilizada para tornar páginas web mais interativas. Enquanto o HTML organiza a estrutura da página e o CSS cuida da aparência, o JavaScript permite criar comportamentos, respostas a cliques, alterações de conteúdo, validações, animações e outras ações dinâmicas. Trata-se de uma linguagem interpretada, ou seja, o código é lido e executado por um interpretador. No caso das páginas web, esse interpretador já existe dentro do próprio navegador. Assim, quando acessamos uma página com JavaScript, o navegador consegue executar os scripts diretamente no computador do usuário.
+
+IMPORTANTE!
+Estabeleça como prática padrão da web: utilizar HTML para a estruturação de conteúdo. Ao formatar, utilize CSS e comportamento com JavaScript.
+
+**Hospedagens**
+Um navegador web é um exemplo de ambiente de hospedagem ECMAScript funcionando do lado do cliente. Isso significa que ele oferece recursos para que o JavaScript seja executado durante a navegação. Apesar disso, JavaScript não está limitado apenas aos navegadores. Ele também pode ser usado do lado do servidor com Node.js, que é um ambiente de execução instalado no sistema operacional do computador, como macOS, Windows ou Linux. Com Node.js, é possível criar programas em JavaScript fora do navegador, inclusive aplicações capazes de funcionar como servidores.
+
+**Ambiente de desenvolvimento**
+Para desenvolver em uma linguagem de programação, geralmente precisamos de algumas ferramentas básicas, como um editor de código e um interpretador ou compilador, dependendo da linguagem utilizada;
+
+1) Ambiente de desenvolvimento online:
+    
+    São plataformas que oferecem um editor de código dentro do próprio navegador e permitem executar os testes sem instalar programas no computador. Também costumam facilitar o compartilhamento dos códigos criados. Esses ambientes são bastante úteis para praticar, testar ideias rapidamente, montar exemplos pequenos e publicar soluções de exercícios. Algumas opções:
+
+    • CodePen: <https://codepen.io/pen/>.
+    • JsBin: <https://jsbin.com/?html,output>. 
+    • JSFiddle: <https://jsfiddle.net/>. 
+
+2) Ambiente de desenvolvimento local
+    Para estudar e criar projetos no computador, normalmente precisamos de três elementos principais: um editor de código, um interpretador e um depurador. Conforme o projeto cresce, outras ferramentas podem ser necessárias para organizar dependências, automatizar tarefas, testar o código e verificar problemas de segurança. Podemos citar, entre outras:
+
+    • Gerenciadores de pacotes: ajudam a instalar e administrar bibliotecas, ferramentas e soluções prontas que podem ser utilizadas durante o desenvolvimento. Exemplos: npm e Yarn. O npm acompanha o Node.js como gerenciador-padrão, enquanto o Yarn foi criado pelo Facebook.
+    • Executores de tarefas e empacotadores de módulos: auxiliam na automação de processos e na união de arquivos, bibliotecas e módulos em versões mais organizadas para o projeto. Exemplos: Grunt e Webpack.
+    • Frameworks de teste: permitem criar e executar testes automáticos para conferir se partes do sistema continuam funcionando corretamente. Exemplos: Mocha, Jasmine e Jest.
+    • Scanners de segurança: ajudam a identificar possíveis vulnerabilidades nas bibliotecas ou no código utilizado. Snyk e RetireJS são alguns exemplos.
+
+    2.1) - Editores de Código: VSCode, NotePad++, WebStorm, SublimeText
+    2.2) - Interpretador: programa responsável por executar as instruções do código. Em aplicações do lado do servidor, podemos usar o Node.js. Em páginas web executadas do lado do cliente, o próprio navegador funciona como interpretador. Os navegadores modernos já possuem mecanismos internos para executar JavaScript.
+    2.3) - Depurador: ferramenta usada para analisar a execução do código passo a passo, facilitando a identificação de erros. Quando utilizamos JavaScript no navegador, também podemos acessar ferramentas de desenvolvimento que incluem um depurador. Elas não aparecem durante a navegação comum, sendo necessário ativá-las manualmente.
+        -As ferramentas normalmente disponibilizadas pelos navegadores são:
+            • Inspetor de códigos: permite observar e alterar temporariamente os elementos HTML e estilos CSS de uma página aberta.
+            • Console JavaScript: mostra mensagens, erros e resultados, além de permitir executar comandos JavaScript no contexto da página atual.
+            • Depurador: permite acompanhar a execução do código linha por linha.
+        Dependendo do navegador, o comando para exibir as ferramentas de desenvolvimento pode ser diferente. 
+        • Internet Explorer e Edge: tecla F12.
+        • Demais navegadores: teclas CTRL+SHIFT+J.
+
+===================================================================
+
+Prática:
+Ctrl + Shift + J (Chrome) para abrir o console
+OBS: Para quebrar linha, use Shift+Enter
+
+Trabalharemos com:
+
+• Variáveis: espaço nomeado para armazenar um dado que pode mudar durante a execução do algoritmo. 
+Ex: preco, nivel, quantidade
+
+• Constantes: valor que deve permanecer o mesmo ao longo do código. Ex: o valor de π
+
+Em JavaScript, é uma boa prática declarar variáveis antes de utilizá-las. Os nomes das variáveis podem usar letras maiúsculas e minúsculas, números, sublinhados e cifrões, mas não podem começar com números. Também não devemos usar palavras reservadas da linguagem como nomes de variáveis.
+
+    "abstract arguments await boolean break byte case catch char class const continue debugger default delete do double else enum eval export extends false final finally float for function goto implements if import in instanceof int interface let long native new null package private protected public return short static super switch synchronized this throw throws transient true try typeof var void volatile while with yield"
+
+IMPORTANTE! 
+O interpretador JavaScript diferencia maiúsculas de minúsculas (CASE SENSITIVE) em nomes de variáveis. Então nomes como total, Total ou TOTAL serão tratados como variáveis diferentes.
+
+LET/VAR
+• Para declarar variáveis que poderão mudar de valor durante o programa, usamos let. Essa é a forma mais recomendada para variáveis comuns, pois evita redeclarações dentro do mesmo escopo. Também existe var, que é uma forma mais antiga e mais flexível, mas pode causar confusão em códigos maiores;
+
+CONST
+• Para declarar valores que não devem ser reatribuídos ao longo do código, usamos const.
+
+Para declarações, como outras instruções JavaScript, podemos terminar com um ponto e vírgula (;). Embora nem sempre ele seja obrigatório, usá-lo ajuda a deixar o código mais claro e reduz o risco de interpretações indesejadas.
+
+IMPORTANTE!
+Antes de fazer a declaração de variáveis, recomenda-se utilizar a expressão "use strict"; (com as aspas + ponto e vírgula) para ativar um modo mais rígido de interpretação do JavaScript. Com isso, o código passa a seguir regras mais seguras, como impedir o uso de variáveis não declaradas.
+
+Quando definimos uma variável ou constante fora de um bloco de código definido por chaves {}, ela fica disponível em um escopo mais amplo. Quando declaramos uma variável com let ou const dentro de um bloco, ela só pode ser acessada dentro daquele bloco.
+
+Ex:
+    let curso = "JavaScript";
+    {
+    let modulo = "Introdução";
+    console.log(curso);
+    console.log(modulo);
+    }
+    console.log(curso);
+    console.log(modulo);
+
+No exemplo acima, temos o retorno:
+    JavaScript
+    Introdução
+    JavaScript
+    Erro: modulo não está definido fora do bloco
+
+Pois modulo é uma variável local, disponível apenas dentro do escopo entre {}.
+
+================================================
+
+Na terminologia JavaScript, literal é um valor escrito diretamente no código. Para utilizar scripts em um arquivo HTML, podemos inserir o JavaScript diretamente na página por meio da tag <script> e </script>, que pode aparecer no head ou no body. Outra possibilidade é criar um arquivo externo, salvá-lo com a extensão .js e conectá-lo ao HTML com a tag <script src="script.js"></script>.
+
+TIPOS DE DADOS
+Dados literais primitivos
+Existem sete tipos de dados primitivos: boolean, number, BigInt, string, symbol, undefined e null.
+
+• Boleano (boolean): representa um valor lógico. Só pode receber true ou false, sempre em letras minúsculas.
+• Numéricos (number): representam números inteiros e decimais. 
+• BigInt: usado para representar números inteiros muito grandes. Para criar um valor BigInt, adicionamos a letra n ao final do número.
+• String: representa uma sequência de caracteres, ou seja, textos. Pode ser escrita com aspas duplas (“ “), aspas simples (‘ ‘) ou crases (` `). 
+• Symbol: representa um valor único e imutável, usado principalmente em situações mais específicas com objetos.
+• Null: representa uma ausência intencional de valor.
+• Undefined: indica que uma variável foi criada, mas ainda não recebeu um valor.
+
+Exemplo:
+Em caso de utilizarmos a operação soma (+) com strings, ocorrerá uma concatenação (a seguir usaremos o operador typeof que retorna o tipo de dado analisado)
+    let codigo = "20" + "25"; 
+    console.log(codigo); // -> 2025 
+    console.log(typeof codigo); // -> string
+
+
+O console.log funciona de forma parecida com um print, exibindo informações no console. Também podemos usar crases para montar textos com variáveis e expressões dentro deles. Para isso, usamos o símbolo $ junto com { }. Exemplo:
+
+    let preco=30; 
+    let desconto=5; 
+    console.log (`O valor final é ${preco-desconto} `);
+    // O valor final é 25
+
+Atenção!
+Ao utilizarmos strings, precisamos conhecer novos conceitos: métodos e autoboxing. Um método é uma função associada a um objeto. Objetos são estruturas mais complexas, que podem armazenar propriedades e métodos. Para chamar um método, escrevemos o nome do objeto ou valor, colocamos um ponto (.) e depois o nome do método. Um exemplo é console.log, em que console é o objeto e log é o método utilizado para exibir informações.
+
+Os dados primitivos possuem objetos correspondentes que podem ser usados temporariamente pelo JavaScript. Esse comportamento é chamado de autoboxing. Quando acessamos uma propriedade ou método a partir de um valor primitivo, o interpretador cria uma conversão temporária para permitir esse acesso.
+
+Exemplo:
+    let palavra = "Cadastro";
+    let exibir_caracter = palavra.charAt(3);
+    console.log(exibir_caracter);
+    exibe -> a (o quarto caractere de 'Cadastro', posição [3])
+    Usamos o método charAt(), que retorna uma única letra da posição indicada. A contagem das posições começa em zero.
+
+
+MÉTODOS COMUMENTE UTILIZADOS:
+• length: propriedade que informa o número de caracteres de uma string. 
+    Ex:
+    let str = "Curso JS";  
+    str.length
+    // -> 8
+
+• charAt(index): informa o caractere localizado na posição “index” da string (começam com zero). 
+    Ex:
+    let str = "Curso JS";
+    str.charAt(6)
+    // -> J
+
+• slice(beginIndex, [opcional] endIndex): método que retorna uma nova string formada a partir dos caracteres entre beginIndex (incluído) e endIndex (excluído); se endIndex for omitido, a nova string será formada de beginIndex até o final dela.    
+    Ex:
+    let str1 = "estudando javascript";
+    str1.slice(0,9) -> “estudando”
+    str1.slice(10,20) -> “javascript”
+
+• split(separator, [opcional] limit): divide a string em partes sempre que encontra um separador e retorna um array com essas partes. O parâmetro opcional limit limita a quantidade de partes adicionadas ao array.
+    Ex1:
+    let str1 = "html css javascript";
+    str1.split(" ") -> “html”, “css”, “javascript”
+    Ex2:
+    console.log('10/06/2026'.split('/'));
+    // ['10', '06', '2026']
+
+DICA: Comentários em JavaScript
+Comentários de uma linha: //
+Comentários de múltiplas linhas: /* ...*/
+
+==================================================================
+
+OPERADORES E INTERAÇÃO
+Assim como outras linguagens de programação, JavaScript também possui operadores para atribuição, comparação, cálculo e lógica:
+
+Operadores JavaScript
+Operador         Descrição
+=                Atribuição simples
++=               Atribuição de adição
+-=               Atribuição de subtração
+*=               Atribuição de multiplicação
+/=               Atribuição de divisão
+%=               Atribuição de resto
+**=              Atribuição de exponenciação
+==               Relação de Igual
+===              Relação de Exatamente igual (conteúdo e tipo)
+!=               Relação de Diferente
+!==              Relação de Exatamente diferente (conteúdo e tipo)
+<                Relação de Menor
+<=               Relação de Menor ou igual
+>                Relação de Maior
+>=               Relação de Maior ou igual
++                Operação de Adição
+-                Operação de Subtração
+*                Operação de Multiplicação
+/                Operação de Divisão
+%                Operação de Resto da divisão
+**               Operação de Exponenciação
+++               Operação de Incremento
+--               Operação de Decremento
+
+Lógicos:
+&&               E (AND)
+||               OU (OR)
+!                NÃO (NOT)
+
+Exemplos:
+var x = 9;
+x -= 4; //5 subtraiu 4 de 9
+var y = x ** 2; //Elevou 5 (valor de x da linha anterior) ao quadrado
+console.log (3 + 3 * 2); // -> 9
+console.log(3 + (3 * 2)); // -> 9
+console.log((3 + 3) * 2); // -> 12
+
+----------------------------------------------------------------------------------------------
+
+POSSIBILIDADES DE INTERAÇÃO COM O USUÁRIO:
+OBS: Necessário inserir no código HTML
+
+a) Caixa de alerta: usamos o método alert(), que recebe um texto como parâmetro e exibe uma mensagem para o usuário. Também podemos escrever window.alert().
+
+b) Caixa de confirmação: a diferença entre alerta e confirmação é que a caixa de confirmação mostra dois botões: “OK” e “Cancelar”. Ela retorna true quando o usuário confirma e false quando cancela.
+
+c) Caixa de prompt: além dos botões “OK” e “Cancelar”, apresenta um campo de texto para que o usuário digite uma informação.
+
+Exemplo prático:
+    let cidade = window.prompt("Em qual cidade você mora?");
+    alert(`Você mora em ${cidade}`);
+
+------------------------------------------------------------------------------------------------------
+
+ESTRUTURAS DE CONTROLE DE FLUXO
+
+1) CONDICIONAIS:
+
+if(condição) { //bloco de código a ser executado se a condição for verdadeira }
+
+if (condição) { condição - código verdadeiro }
+else { condição - código falso }
+
+if (condição_1) { codigo }
+else if (condição_2) { codigo }
+else if (condição_3) { codigo }
+else { codigo }
+
+switch (expressão) {
+    case resultado 1:
+        código 1
+        break;
+    case resultado 2:
+        código 2
+        break;
+    default:
+        código
+}
+// A declaração switch permite comparar o valor de uma expressão com diferentes casos possíveis. Quando encontra uma correspondência, executa o bloco indicado. O break evita que os próximos casos sejam executados sem necessidade.
+
+Ex: 
+let turno = prompt("Qual seu turno? ");
+switch(turno){ 
+    case "manhã": 
+        alert("Você estuda pela manhã");
+        break;
+    case "tarde": 
+        alert("Você estuda à tarde");
+        break; 
+    case "noite": 
+        alert("Você estuda à noite"); 
+        break; 
+    default: 
+        alert("Turno não reconhecido");
+}
+
+
+2) LAÇOS DE REPETIÇÃO:
+
+2.1 Laço for
+Usamos for quando temos uma noção clara de quantas vezes o bloco deve se repetir. Por exemplo, quando queremos contar de 1 até 5 ou percorrer uma quantidade definida de elementos.
+
+
+A sintaxe é: 
+for (inicialização; condição; incremento) { bloco de código a ser executado }
+
+Ex: 
+for (let i = 1; i <= 5; i++) { 
+    console.log(i); 
+    }
+// inicializamos a variável i com 1, definimos a condição (i<=5) e aumentamos 1 a cada repetição (i++).
+
+
+2.2 Laço While
+Normalmente usamos quando não sabemos exatamente quantas vezes repetir algo, mas sabemos qual condição precisa continuar verdadeira para o laço seguir.
+
+
+A sintaxe é:
+while(condição) { bloco de código }
+
+Ex: se desejarmos imprimir os números de 5 em 5 até 25: 
+let num = 5; 
+while(num <= 25) { 
+    console.log(num); 
+    num += 5; 
+    }
+
+
+2.3 Laço do/While
+É parecido com o loop while, mas possui uma diferença importante: no while a condição é testada antes da execução do bloco, enquanto no do/while o bloco executa pelo menos uma vez antes da verificação.
+
+A sintaxe é: 
+do {
+    bloco de código
+} while(condição);
+
+Reescrevendo o último exemplo:
+let num = 5; 
+do { 
+    console.log(num); 
+    num += 5; 
+} while(num<=25)
+

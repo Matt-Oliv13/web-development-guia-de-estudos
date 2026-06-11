@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Responsividade de Imagens</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111827;
+      color: white;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #facc15;
+    }
+
+    h2 {
+      max-width: 1000px;
+      margin: 50px auto 15px;
+      color: #facc15;
+    }
+
+    p {
+      max-width: 1000px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
+      color: #d1d5db;
+    }
+
+    /*
+      =========================================================
+      RESPONSIVIDADE DE IMAGENS
+      =========================================================
+
+      Uma imagem responsiva é uma imagem que se adapta ao tamanho da tela ou ao tamanho do container onde ela está inserida.
+
+      A propriedade mais básica é:
+
+      max-width: 100%;
+      height: auto;
+
+      Isso faz a imagem diminuir quando o container fica menor, sem distorcer sua proporção original.
+    */
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto 40px;
+      padding: 20px;
+      background-color: #374151;
+      border-radius: 12px;
+    }
+
+    /*
+      =========================================================
+      EXEMPLO 1: IMAGEM OCUPANDO 100% DA TELA
+      =========================================================
+
+      O body possui padding: 40px.
+      Esse padding cria uma margem interna nas laterais da página.
+
+      Para a imagem ocupar a tela inteira lateralmente,
+      usamos:
+
+      width: calc(100% + 80px);
+
+      Por quê 80px?
+
+      Porque o body tem:
+      - 40px de padding à esquerda
+      - 40px de padding à direita
+
+      40px + 40px = 80px
+
+      Depois usamos:
+
+      margin-left: -40px;
+      margin-right: -40px;
+
+      Isso faz o container "escapar" do padding lateral do body.
+    */
+
+    .container-tela-cheia {
+      width: calc(100% + 80px);
+      margin-left: -40px;
+      margin-right: -40px;
+      margin-bottom: 40px;
+      padding: 0;
+      background-color: #374151;
+    }
+
+    .imagem-responsiva {
+      /*
+        A imagem ocupa 100% da largura do container.
+
+        Como o container-tela-cheia ocupa toda a largura da tela,
+        a imagem também ocupa toda a largura da tela.
+      */
+      width: 100%;
+
+      /*
+        O height: auto mantém a proporção original da imagem.
+        Assim, ela não fica achatada nem esticada.
+      */
+      height: auto;
+
+      display: block;
+    }
+
+    /*
+      =========================================================
+      IMAGEM COMO CAPA DO CONTAINER
+      =========================================================
+
+      Neste exemplo, o container tem uma altura fixa.
+      A imagem precisa preencher toda a área disponível.
+
+      Para isso, usamos:
+      object-fit: cover;
+
+      Essa propriedade faz a imagem preencher o container sem distorcer.
+      Porém, partes da imagem podem ser cortadas.
+
+      Para manter o elemento principal da imagem centralizado, usamos:
+      object-position: center;
+    */
+
+    .moldura {
+      max-width: 1000px;
+      height: 420px;
+      margin: 0 auto 40px;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: #374151;
+      border: 5px solid #4b5563;
+    }
+
+    .imagem-capa {
+      width: 100%;
+      height: 100%;
+
+      /*
+        Faz a imagem cobrir todo o espaço da moldura,
+        mantendo a proporção original.
+      */
+      object-fit: cover;
+
+      /*
+        Mantém o centro da imagem visível.
+        Isso é útil quando existe um elemento importante no centro,
+        como uma pessoa, objeto, logo ou símbolo.
+      */
+      object-position: center;
+
+      display: block;
+    }
+
+    /*
+      =========================================================
+      EXEMPLO COM TAMANHO VARIÁVEL
+      =========================================================
+
+      A moldura abaixo muda de largura conforme a tela.
+      Mesmo assim, o elemento central da imagem continua aparecendo,
+      porque a imagem usa object-position: center.
+    */
+
+    .moldura-variavel {
+      width: 70%;
+      height: 380px;
+      margin: 0 auto 40px;
+      border-radius: 12px;
+      overflow: hidden;
+      background-color: #374151;
+      border: 5px solid #4b5563;
+    }
+
+    .observacao {
+      max-width: 1000px;
+      margin: 0 auto 20px;
+      padding: 15px;
+      border-left: 5px solid #facc15;
+      background-color: #1f2937;
+      border-radius: 8px;
+      color: #e5e7eb;
+    }
+
+    /*
+      =========================================================
+      MEDIA QUERY PARA TELAS MENORES
+      =========================================================
+
+      Quando a tela tiver até 768px, vamos diminuir o padding do body
+      e fazer a moldura variável ocupar mais largura da tela.
+    */
+
+    @media (max-width: 768px) {
+      body {
+        padding: 20px;
+      }
+
+      /*
+        Agora o body tem:
+        - 20px de padding à esquerda
+        - 20px de padding à direita
+
+        Então precisamos compensar 40px no total.
+      */
+      .container-tela-cheia {
+        width: calc(100% + 40px);
+        margin-left: -20px;
+        margin-right: -20px;
+      }
+
+      .moldura,
+      .moldura-variavel {
+        height: 300px;
+      }
+
+      .moldura-variavel {
+        width: 100%;
+      }
+    }
+
+    /*
+      Em telas muito pequenas, como celulares Android/iOS,
+      diminuímos um pouco mais a altura das molduras.
+    */
+
+    @media (max-width: 480px) {
+      .moldura,
+      .moldura-variavel {
+        height: 240px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Responsividade de Imagens</h1>
+
+  <p>
+    Neste arquivo, veremos como uma imagem pode diminuir ou aumentar conforme
+    o tamanho da tela, mantendo sua proporção e preservando um elemento interno
+    centralizado.
+  </p>
+
+  <h2>Exemplo 1: Imagem ocupando 100% da tela lateralmente</h2>
+
+  <p>
+    Aqui usamos uma imagem que ocupa toda a largura da tela.
+    Mesmo que o body tenha padding, o container da imagem compensa esse espaço
+    usando calc() e margens negativas.
+  </p>
+
+  <div class="container-tela-cheia">
+    <img class="imagem-responsiva" src="imagem-wide.jpg" alt="Imagem horizontal com elemento centralizado">
+  </div>
+
+  <h2>Exemplo 2: Imagem preenchendo uma moldura</h2>
+
+  <p>
+    Neste exemplo, a moldura tem altura fixa. A imagem preenche todo o espaço
+    usando object-fit: cover. O elemento interno continua centralizado porque
+    usamos object-position: center.
+  </p>
+
+  <div class="moldura">
+    <img class="imagem-capa" src="imagem-quadrada.jpg" alt="Imagem quadrada com elemento centralizado">
+  </div>
+
+  <div class="observacao">
+    Reduza e aumente a largura da janela do navegador. A imagem pode ser cortada
+    nas bordas, mas o elemento principal permanece no centro.
+  </div>
+
+  <h2>Exemplo 3: Moldura variável com imagem vertical</h2>
+
+  <p>
+    Agora usamos uma imagem vertical dentro de uma moldura que muda de tamanho.
+    Mesmo com cortes laterais ou superiores, o centro continua sendo priorizado.
+  </p>
+
+  <div class="moldura-variavel">
+    <img class="imagem-capa" src="imagem-vertical.jpg" alt="Imagem vertical com elemento centralizado">
+  </div>
+
+</body>
+</html>

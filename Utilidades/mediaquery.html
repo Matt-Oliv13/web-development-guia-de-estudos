@@ -1,0 +1,221 @@
+<!-- Aqui veremos o uso de Media Queries -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Demonstração de Media Query</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #111827;
+      color: white;
+      margin: 0;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    p {
+      max-width: 900px;
+      margin: 0 auto 30px;
+      line-height: 1.6;
+      color: #d1d5db;
+      text-align: center;
+    }
+
+    /*
+      Media Query é um recurso do CSS que permite aplicar estilos diferentes
+      dependendo de características da tela, como largura, altura, ou orientação. É como o "if__:" de outras linguagens de programação 
+
+      Neste exemplo, a cor do container muda de acordo com a largura da tela.
+    */
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px;
+      border-radius: 15px;
+      text-align: center;
+      /*
+        Esta será a cor padrão do container.
+        Ela será usada caso nenhuma media query abaixo seja aplicada.
+      */
+      background-color: #64748b;
+    }
+
+    .container h2 {
+      margin-top: 0;
+      font-size: 32px;
+    }
+
+    .container p {
+      color: white;
+      margin-bottom: 0;
+      font-size: 18px;
+    }
+
+    /*
+      =========================================================
+      EXEMPLO 1: CELULARES ANDROID/iOS
+      =========================================================
+
+      Telas pequenas, geralmente até 480px de largura.
+
+      Exemplos:
+      - iPhone SE
+      - iPhone 12/13/14 em modo retrato
+      - Celulares Android compactos
+    */
+    @media (max-width: 480px) {
+      .container {
+        background-color: #ef4444;
+      }
+
+      .container h2::after {
+        content: " - Celular Android/iOS";
+      }
+    }
+
+    /*
+      =========================================================
+      EXEMPLO 2: CELULARES MAIORES E TABLETS PEQUENOS
+      =========================================================
+
+      Telas entre 481px e 768px.
+
+      Exemplos:
+      - Celulares grandes
+      - iPhone Pro Max
+      - Tablets pequenos
+    */
+    @media (min-width: 481px) and (max-width: 768px) {
+      .container {
+        background-color: #f97316;
+      }
+
+      .container h2::after {
+        content: " - Celular grande ou tablet pequeno";
+      }
+    }
+
+    /*
+      =========================================================
+      EXEMPLO 3: TABLETS E TELAS INTERMEDIÁRIAS
+      =========================================================
+
+      Telas entre 769px e 1024px.
+
+      Exemplos:
+      - Tablets em modo paisagem
+      - iPad
+      - telas intermediárias
+    */
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .container {
+        background-color: #eab308;
+        color: #111827;
+      }
+
+      .container p {
+        color: #111827;
+      }
+
+      .container h2::after {
+        content: " - Tablet";
+      }
+    }
+
+    /*
+      =========================================================
+      EXEMPLO 4: NOTEBOOKS
+      =========================================================
+
+      Telas entre 1025px e 1366px.
+
+      Exemplos:
+      - Notebooks comuns
+      - Notebooks 13", 14" e 15"
+      - Resolução 1366x768
+    */
+    @media (min-width: 1025px) and (max-width: 1366px) {
+      .container {
+        background-color: #22c55e;
+      }
+
+      .container h2::after {
+        content: " - Notebook";
+      }
+    }
+
+    /*
+      =========================================================
+      EXEMPLO 5: DESKTOP FULL HD
+      =========================================================
+
+      Telas entre 1367px e 1920px.
+
+      Exemplos:
+      - Monitores Full HD
+      - Resolução 1920x1080
+    */
+    @media (min-width: 1367px) and (max-width: 1920px) {
+      .container {
+        background-color: #3b82f6;
+      }
+
+      .container h2::after {
+        content: " - Desktop Full HD";
+      }
+    }
+
+    /*
+      =========================================================
+      EXEMPLO 6: TELAS GRANDES
+      =========================================================
+
+      Telas maiores que 1920px.
+
+      Exemplos:
+      - Monitores 2K
+      - Monitores 4K
+      - Ultrawide
+    */
+    @media (min-width: 1921px) {
+      .container {
+        background-color: #8b5cf6;
+      }
+
+      .container h2::after {
+        content: " - Tela grande";
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <h1>Demonstração de Media Query</h1>
+
+  <p>
+    Redimensione a janela do navegador para ver a cor do container mudar.
+    Cada cor representa um tamanho de tela diferente.
+  </p>
+
+  <div class="container">
+    <h2>Tamanho atual da tela</h2>
+
+    <p>
+      Este container muda de cor conforme a largura da tela.
+      Isso é feito usando media queries no CSS.
+    </p>
+  </div>
+
+</body>
+</html>
+

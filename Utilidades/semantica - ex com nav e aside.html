@@ -1,0 +1,136 @@
+<!-- 
+ 
+Podemos utilizar <nav> para menus, geralmente inserindo os links de direcionamento para outras páginas, mas você também pode usar <ul></ul> e <li></li> para montar o menu.
+
+A tag <aside></aside> representa um conteúdo secundário ou complementar em relação ao conteúdo principal da página. Ela é muito usada para coisas como:
+
+-->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplo com nav e aside</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #1f2937;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    nav {
+      background-color: #374151;
+      padding: 10px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+    }
+
+    .container { /*Esta é a linha principal para alinhamento dos blocos main e aside, pois define a estilização do bloco contendo os elementos filhos */
+      display: flex; /*essa linha efine que eles ficarão lado a lado*/
+      gap: 20px; /* Define o espaçamento entre os filhos */
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    main {
+      background-color: white;
+      padding: 20px;
+      flex: 3;
+      border-radius: 8px;
+    }
+
+    aside {
+      background-color: #e0f2fe;
+      padding: 20px;
+      flex: 1;
+      border-radius: 8px;
+      border-left: 5px solid #0284c7;
+    }
+
+    footer {
+      background-color: #1f2937;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Meu Blog de Desenvolvimento Web</h1>
+  </header>
+
+  <nav> <!-- Aqui embaixo em href=" "seriam inseridos os links do menu para direcionamento -->
+    <a href="#">Início</a>
+    <a href="#">HTML</a>
+    <a href="#">CSS</a>
+    <a href="#">Contato</a>
+  </nav>
+
+  <div class="container"> 
+    <!-- 
+    
+    Aqui temos um dos passos mais importantes para o funcionamento do elemento aside, pois criamos um container para que seus elementos sejam formatados pelas linhas de estilização internas em head e fiquem lado a lado. 
+     
+    Use tags semânticas quando o conteúdo tiver uma função clara. Use <div> quando você só precisa de um bloco genérico para organizar ou aplicar CSS(container e cards).
+    
+    -->
+
+    <main>
+      <article>
+        <h2>O que é HTML semântico?</h2>
+
+        <p>
+          HTML semântico é o uso de tags que possuem significado,
+          como header, main, article, section, aside e footer.
+        </p>
+
+        <p>
+          Essas tags ajudam a organizar melhor a página e também facilitam
+          a leitura do conteúdo por navegadores, mecanismos de busca e leitores de tela.
+        </p>
+      </article>
+    </main>
+
+    <aside>
+      <h3>Conteúdo relacionado</h3>
+
+      <ul>
+        <li>O que é CSS?</li>
+        <li>Diferença entre div e section</li>
+        <li>Como usar article</li>
+      </ul>
+
+      <h3>Sobre o autor</h3>
+
+      <p>
+        Estudante de desenvolvimento web aprendendo HTML e CSS.
+      </p>
+    </aside>
+
+  </div>
+
+  <footer>
+    <p>&copy; 2026 - Minha Página</p>
+  </footer>
+
+</body>
+</html>
+    
