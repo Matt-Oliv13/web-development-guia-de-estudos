@@ -207,7 +207,41 @@ console.log (3 + 3 * 2); // -> 9
 console.log(3 + (3 * 2)); // -> 9
 console.log((3 + 3) * 2); // -> 12
 
-----------------------------------------------------------------------------------------------
+--------------------------------------------------------------
+
+Conversão de strings com parse em JavaScript
+
+Em JavaScript, algumas informações digitadas pelo usuário em formulários chegam como string, mesmo quando parecem números. Para transformar essas strings em valores numéricos, podemos usar funções de conversão como parseInt() e parseFloat().
+
+O parseInt() converte uma string para um número inteiro:
+
+    let idade = "25";
+    let idadeConvertida = parseInt(idade);
+    console.log(idadeConvertida); // 25
+
+Já o parseFloat() converte uma string para um número decimal:
+
+    let preco = "19.90";
+    let precoConvertido = parseFloat(preco);
+    console.log(precoConvertido); // 19.9
+
+Essas funções leem a string da esquerda para a direita e tentam extrair um número válido. Por exemplo:
+
+    console.log(parseInt("20 anos")); // 20
+    console.log(parseFloat("10.5 reais")); // 10.5
+
+Mas, se a string não começar com um número válido, o resultado será NaN, que significa Not a Number:
+
+    console.log(parseInt("idade 20")); // NaN
+
+Também existe o Number(), que converte a string inteira para número, mas é mais rígido:
+
+    console.log(Number("20"));       // 20
+    console.log(Number("20 anos"));  // NaN
+
+Resumo: usamos parseInt() para números inteiros, parseFloat() para números decimais e Number() quando queremos converter uma string que contém apenas um número válido.
+
+---------------------------------------------------------------------------------
 
 POSSIBILIDADES DE INTERAÇÃO COM O USUÁRIO:
 OBS: Necessário inserir no código HTML

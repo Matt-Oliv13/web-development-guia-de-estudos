@@ -1,0 +1,34 @@
+Operadores JavaScript
+Operador         Descrição
+=                Atribuição simples
++=               Atribuição de adição
+-=               Atribuição de subtração
+*=               Atribuição de multiplicação
+/=               Atribuição de divisão
+%=               Atribuição de resto
+**=              Atribuição de exponenciação
+==               Relação de Igual
+===              Relação de Exatamente igual (conteúdo e tipo)
+!=               Relação de Diferente
+!==              Relação de Exatamente diferente (conteúdo e tipo)
+<                Relação de Menor
+<=               Relação de Menor ou igual
+>                Relação de Maior
+>=               Relação de Maior ou igual
++                Operação de Adição
+-                Operação de Subtração
+*                Operação de Multiplicação
+/                Operação de Divisão
+%                Operação de Resto da divisão
+**               Operação de Exponenciação
+++               Operação de Incremento
+--               Operação de Decremento
+
+Lógicos:
+&&               E (AND)
+||               OU (OR)
+!                NÃO (NOT)
+
+
+Conversão de Strings:
+Usamos parseInt() para números inteiros, parseFloat() para números decimais e Number() quando queremos converter uma string que contém apenas um número válido.
