@@ -112,7 +112,7 @@ Em caso de utilizarmos a operação soma (+) com strings, ocorrerá uma concaten
     console.log(typeof codigo); // -> string
 
 
-O console.log funciona de forma parecida com um print, exibindo informações no console. Também podemos usar crases para montar textos com variáveis e expressões dentro deles. Para isso, usamos o símbolo $ junto com { }. Exemplo:
+O console.log funciona de forma parecida com um print, exibindo informações no console. Também podemos usar CRASES (`) para montar textos com variáveis e expressões dentro deles. Para isso, usamos o símbolo $ junto com { }. Exemplo:
 
     let preco=30; 
     let desconto=5; 
@@ -133,7 +133,7 @@ Exemplo:
 
 
 MÉTODOS COMUMENTE UTILIZADOS:
-• length: propriedade que informa o número de caracteres de uma string. 
+• length: informa o número de caracteres de uma string. 
     Ex:
     let str = "Curso JS";  
     str.length
@@ -151,10 +151,10 @@ MÉTODOS COMUMENTE UTILIZADOS:
     str1.slice(0,9) -> “estudando”
     str1.slice(10,20) -> “javascript”
 
-• split(separator, [opcional] limit): divide a string em partes sempre que encontra um separador e retorna um array com essas partes. O parâmetro opcional limit limita a quantidade de partes adicionadas ao array.
+• split(separador, [nº do limite de separacoes opcional]): divide a string em partes sempre que encontra um separador e retorna um array com essas partes. O parâmetro opcional limit limita a quantidade de partes adicionadas ao array.
     Ex1:
     let str1 = "html css javascript";
-    str1.split(" ") -> “html”, “css”, “javascript”
+    str1.split(" ", [2]) -> “html”, “css”
     Ex2:
     console.log('10/06/2026'.split('/'));
     // ['10', '06', '2026']
@@ -248,9 +248,9 @@ OBS: Necessário inserir no código HTML
 
 a) Caixa de alerta: usamos o método alert(), que recebe um texto como parâmetro e exibe uma mensagem para o usuário. Também podemos escrever window.alert().
 
-b) Caixa de confirmação: a diferença entre alerta e confirmação é que a caixa de confirmação mostra dois botões: “OK” e “Cancelar”. Ela retorna true quando o usuário confirma e false quando cancela.
+b) Caixa de confirmação (confirm()): a diferença entre alerta e confirmação é que a caixa de confirmação mostra dois botões: “OK” e “Cancelar”. Ela retorna true quando o usuário confirma e false quando cancela.
 
-c) Caixa de prompt: além dos botões “OK” e “Cancelar”, apresenta um campo de texto para que o usuário digite uma informação.
+c) Caixa de prompt (prompt()): além dos botões “OK” e “Cancelar”, apresenta um campo de texto para que o usuário digite uma informação.
 
 Exemplo prático:
     let cidade = window.prompt("Em qual cidade você mora?");
@@ -264,15 +264,15 @@ ESTRUTURAS DE CONTROLE DE FLUXO
 
 if(condição) { //bloco de código a ser executado se a condição for verdadeira }
 
-if (condição) { condição - código verdadeiro }
+if(condição) { condição - código verdadeiro }
 else { condição - código falso }
 
-if (condição_1) { codigo }
-else if (condição_2) { codigo }
-else if (condição_3) { codigo }
+if(condição_1) { codigo }
+else if(condição_2) { codigo }
+else if(condição_3) { codigo }
 else { codigo }
 
-switch (expressão) {
+switch(expressão) {
     case resultado 1:
         código 1
         break;
